@@ -1,0 +1,586 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_tab" name="shell-type"><title>Electricity Bill Management System</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{width:100%;margin:0;padding:0;min-height:100%;}body{overscroll-behavior-y:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "tertiary-container": "#002d1d", "on-secondary-container": "#00476e", "error-container": "#ffdad6", "on-tertiary-fixed": "#002114", "inverse-on-surface": "#eaf1ff", "surface-container-high": "#dce9ff", "primary": "#001229", "on-secondary": "#ffffff", "primary-fixed-dim": "#b2c8ed", "surface": "#f8f9ff", "error": "#ba1a1a", "on-error-container": "#93000a", "on-surface-variant": "#44474d", "outline-variant": "#c4c6ce", "surface-container-lowest": "#ffffff", "tertiary-fixed-dim": "#68dba9", "on-primary-fixed-variant": "#324866", "on-tertiary-fixed-variant": "#005137", "surface-dim": "#cbdbf5", "surface-container-highest": "#d3e4fe", "secondary-container": "#5bb8fe", "on-tertiary-container": "#1fa072", "tertiary": "#00160c", "on-primary": "#ffffff", "outline": "#74777e", "on-primary-container": "#798fb1", "surface-container": "#e5eeff", "surface-bright": "#f8f9ff", "on-tertiary": "#ffffff", "secondary": "#006398", "tertiary-fixed": "#85f8c4", "surface-variant": "#d3e4fe", "on-error": "#ffffff", "on-surface": "#0b1c30", "secondary-fixed": "#cce5ff", "on-primary-fixed": "#021c39", "surface-container-low": "#eff4ff", "inverse-surface": "#213145", "secondary-fixed-dim": "#93ccff", "on-background": "#0b1c30", "surface-tint": "#4a5f7f", "inverse-primary": "#b2c8ed", "on-secondary-fixed-variant": "#004b73", "background": "#f8f9ff", "primary-fixed": "#d4e3ff", "on-secondary-fixed": "#001d31", "primary-container": "#0f2744" }, borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, spacing: { "space-sm": "0.5rem", "gutter": "1rem", "space-md": "1rem", "space-xs": "0.25rem", "margin-desktop": "2rem", "space-lg": "1.5rem", "gutter-desktop": "1.5rem", "space-xl": "2rem", "margin": "1rem" }, fontFamily: { "body-md": ["Hanken Grotesk"], "label-md": ["Hanken Grotesk"], "display-lg": ["Manrope"], "headline-lg": ["Manrope"], "metric-num-lg": ["Hanken Grotesk"], "title-lg": ["Manrope"], "display-lg-mobile": ["Manrope"], "headline-md": ["Manrope"], "body-sm": ["Hanken Grotesk"], "metric-num-md": ["Hanken Grotesk"], "label-sm": ["Hanken Grotesk"], "headline-xl": ["Manrope"], "body-lg": ["Hanken Grotesk"] }, fontSize: { "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "label-md": ["13px", { "lineHeight": "18px", "fontWeight": "500" }], "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "700" }], "headline-lg": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "metric-num-lg": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "title-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }], "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-md": ["18px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }], "metric-num-md": ["20px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface flex flex-col min-h-screen relative antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-gutter flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><button aria-label="Open Navigation Drawer" class="w-11 h-11 flex items-center justify-center text-on-surface hover:text-secondary rounded-lg active:scale-95 transition-all" onclick="document.getElementById('side-drawer').classList.remove('-translate-x-full');document.getElementById('drawer-overlay').classList.remove('opacity-0','pointer-events-none');" type="button"><span class="material-symbols-outlined text-[24px]">menu</span></button><img alt="Electricity Bill Management System Logo" class="h-8 w-auto object-contain shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1UHrVYwUFG-_MWAjb045klccl6AzLpsGZFlc_CoHfj2ifHKTAnqw631GbVUW3xOYGvMCC22BHyyYk1hpnr38SUFvj49cMxaRZeQSaMF6y-R67YQnAGADSXOIYgEz3x2PGbxefu7Xp2Vx_tm-34rhsgNnjaDqCu4uRys6dqhbcFG4snf246eQ9GuspmOTG40KClG2g1jUbY-Ke-Si6YaHtwmK84b94btCYczuKthk5UjWdg0k9nqb6up3ZTV"><div class="flex flex-col min-w-0"><span class="font-title-lg text-title-lg text-primary truncate leading-tight">Electricity Bill</span><span class="font-label-sm text-label-sm text-secondary truncate font-semibold uppercase tracking-wider">Management System</span></div></div><div class="flex items-center gap-space-xs shrink-0"><span class="hidden xs:inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm tracking-normal uppercase">Admin</span><button aria-label="Notifications" class="relative w-11 h-11 flex items-center justify-center text-on-surface-variant hover:text-on-surface active:scale-95 transition-all" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2 right-2 flex items-center justify-center min-w-[16px] h-4 px-1 rounded-full bg-error text-on-error font-label-sm text-[10px] font-bold leading-none">3</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><div class="fixed inset-0 z-50 bg-primary/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300" id="drawer-overlay" onclick="document.getElementById('side-drawer').classList.add('-translate-x-full');this.classList.add('opacity-0','pointer-events-none');"></div><aside class="fixed top-0 left-0 bottom-0 z-50 w-72 max-w-[80vw] bg-surface-container-lowest shadow-[0_4px_24px_rgba(0,18,41,0.12)] -translate-x-full transition-transform duration-300 flex flex-col pt-safe pb-safe" id="side-drawer"><div class="h-16 px-gutter flex items-center justify-between bg-surface-container-low"><div class="flex items-center gap-space-sm"><img alt="Electricity Bill Management System Logo" class="h-7 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UHrVYwUFG-_MWAjb045klccl6AzLpsGZFlc_CoHfj2ifHKTAnqw631GbVUW3xOYGvMCC22BHyyYk1hpnr38SUFvj49cMxaRZeQSaMF6y-R67YQnAGADSXOIYgEz3x2PGbxefu7Xp2Vx_tm-34rhsgNnjaDqCu4uRys6dqhbcFG4snf246eQ9GuspmOTG40KClG2g1jUbY-Ke-Si6YaHtwmK84b94btCYczuKthk5UjWdg0k9nqb6up3ZTV"><span class="font-title-lg text-title-lg text-primary">Electricity Bill Management System</span></div><button aria-label="Close Drawer" class="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:text-on-surface" onclick="document.getElementById('side-drawer').classList.add('-translate-x-full');document.getElementById('drawer-overlay').classList.add('opacity-0','pointer-events-none');" type="button"><span class="material-symbols-outlined text-[22px]">close</span></button></div><div class="px-gutter py-space-sm bg-surface-container-low"><div class="flex items-center justify-between p-space-xs bg-surface rounded-lg"><span class="font-label-sm text-label-sm text-on-surface-variant px-space-xs">Active Role:</span><button class="flex items-center gap-1 px-2.5 py-1 rounded bg-primary text-on-primary font-label-sm text-label-sm" type="button"><span class="material-symbols-outlined text-[14px]">swap_horiz</span>Admin</button></div></div><nav class="flex-1 overflow-y-auto px-space-sm py-space-md space-y-1" data-active-classes="bg-secondary-fixed text-on-secondary-fixed font-semibold"><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="login-switch-role" href="#"><span class="material-symbols-outlined text-[22px]">manage_accounts</span><span class="font-label-md text-label-md">Login / Switch Role</span></a><a aria-current="page" class="flex items-center gap-space-md px-space-md h-12 rounded-lg transition-all bg-secondary-fixed text-on-secondary-fixed font-semibold" data-path="admin-dashboard" href="#"><span class="material-symbols-outlined text-[22px]">dashboard</span><span class="font-label-md text-label-md">Admin Dashboard</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="customers" href="#"><span class="material-symbols-outlined text-[22px]">group</span><span class="font-label-md text-label-md">Customers</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="meters" href="#"><span class="material-symbols-outlined text-[22px]">electric_meter</span><span class="font-label-md text-label-md">Meters</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="meter-readings" href="#"><span class="material-symbols-outlined text-[22px]">speed</span><span class="font-label-md text-label-md">Meter Readings</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="bills-invoice" href="#"><span class="material-symbols-outlined text-[22px]">receipt_long</span><span class="font-label-md text-label-md">Bills &amp; Invoice</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="payments" href="#"><span class="material-symbols-outlined text-[22px]">payments</span><span class="font-label-md text-label-md">Payments</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="tariff-slabs" href="#"><span class="material-symbols-outlined text-[22px]">stacked_bar_chart</span><span class="font-label-md text-label-md">Tariff Slabs</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="reports" href="#"><span class="material-symbols-outlined text-[22px]">analytics</span><span class="font-label-md text-label-md">Reports</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="customer-portal" href="#"><span class="material-symbols-outlined text-[22px]">account_circle</span><span class="font-label-md text-label-md">Customer Portal</span></a></nav><div class="p-gutter bg-surface-container-low flex items-center justify-between"><div class="flex items-center gap-space-xs"><div class="w-2.5 h-2.5 rounded-full bg-tertiary-fixed-dim"></div><span class="font-label-sm text-label-sm text-on-surface-variant">Grid Telemetry Online</span></div><span class="font-label-sm text-label-sm text-secondary font-bold">v3.4.1</span></div></aside><main class="flex-1 flex flex-col relative w-full pt-16 pb-20 bg-surface min-h-[calc(100vh-5rem)]"><div class="flex flex-col w-full space-y-space-md p-space-md">
+<!-- Zone Header Status Banner -->
+<div class="bg-primary text-on-primary rounded-xl p-space-md shadow-md relative overflow-hidden">
+<div class="flex items-center justify-between relative z-10">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px] text-secondary-container">bolt</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md tracking-tight truncate">Maharashtra Discom Zone 4</span>
+<span class="flex h-2.5 w-2.5 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-fixed opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-tertiary-fixed-dim"></span>
+</span>
+</div>
+<p class="font-label-sm text-label-sm text-primary-fixed-dim uppercase tracking-wider">Central Grid Hub • Substation Feed #09</p>
+</div>
+</div>
+<div class="hidden sm:flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-primary-fixed-dim">Cycle Apr 2024</span>
+<span class="font-title-lg text-title-lg text-secondary-container">99.8% Reliability</span>
+</div>
+</div>
+<!-- Micro telemetry ticker strip -->
+<div class="mt-space-sm pt-space-xs flex items-center justify-between text-primary-fixed text-label-sm font-label-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed">sensors</span> Substation Load: 42.1 MW
+      </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary-container">sync</span> Auto-Sync: 4m ago
+      </span>
+</div>
+</div>
+<!-- Quick Action Command Row -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-xs sm:gap-space-sm">
+<button class="flex items-center justify-center gap-2 h-12 bg-primary text-on-primary rounded-lg font-label-md text-label-md active:scale-95 transition-transform shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px] text-secondary-container">speed</span>
+<span class="truncate">+ Record Reading</span>
+</button>
+<button class="flex items-center justify-center gap-2 h-12 bg-surface-container-lowest text-primary rounded-lg font-label-md text-label-md active:scale-95 transition-transform shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px] text-secondary">receipt_long</span>
+<span class="truncate">+ Generate Bill</span>
+</button>
+<button class="flex items-center justify-center gap-2 h-12 bg-surface-container-lowest text-primary rounded-lg font-label-md text-label-md active:scale-95 transition-transform shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px] text-secondary">person_add</span>
+<span class="truncate">+ Add Consumer</span>
+</button>
+<button class="flex items-center justify-center gap-2 h-12 bg-secondary text-on-secondary rounded-lg font-label-md text-label-md active:scale-95 transition-transform shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px]">payments</span>
+<span class="truncate">Collect Payment</span>
+</button>
+</div>
+<!-- Key Dashboard Metric Cards Bento Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-space-sm">
+<!-- Total Customers -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Total Consumers</span>
+<div class="w-7 h-7 rounded-lg bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-secondary">group</span>
+</div>
+</div>
+<div class="mt-2">
+<span class="font-metric-num-lg text-metric-num-lg text-on-surface tracking-tight">1,248</span>
+<div class="flex items-center gap-1 mt-1 text-tertiary-container bg-tertiary-fixed/30 w-fit px-1.5 py-0.5 rounded">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span class="font-label-sm text-label-sm">+4.2% this mo</span>
+</div>
+</div>
+</div>
+<!-- Active Meters -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Active Meters</span>
+<div class="w-7 h-7 rounded-lg bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-secondary">electric_meter</span>
+</div>
+</div>
+<div class="mt-2">
+<span class="font-metric-num-lg text-metric-num-lg text-on-surface tracking-tight">1,196</span>
+<div class="flex items-center gap-1 mt-1 text-on-secondary-container bg-secondary-fixed w-fit px-1.5 py-0.5 rounded">
+<span class="material-symbols-outlined text-[14px]">hub</span>
+<span class="font-label-sm text-label-sm">95.8% live grid</span>
+</div>
+</div>
+</div>
+<!-- Monthly Revenue -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between col-span-2 sm:col-span-1">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Monthly Revenue</span>
+<div class="w-7 h-7 rounded-lg bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-secondary">account_balance_wallet</span>
+</div>
+</div>
+<div class="mt-2 flex items-baseline justify-between">
+<div>
+<span class="font-metric-num-lg text-metric-num-lg text-on-surface tracking-tight">₹8,45,620</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Target: ₹9.20 Lakh</p>
+</div>
+<div class="h-2 w-16 bg-surface-container-high rounded-full overflow-hidden self-center">
+<div class="h-full bg-secondary rounded-full" style="width: 91.9%;"></div>
+</div>
+</div>
+</div>
+<!-- Paid Bills -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Paid Invoices</span>
+<div class="w-7 h-7 rounded-lg bg-tertiary-fixed/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-on-tertiary-container">check_circle</span>
+</div>
+</div>
+<div class="mt-2">
+<span class="font-metric-num-lg text-metric-num-lg text-on-surface tracking-tight">1,062</span>
+<p class="font-label-sm text-label-sm text-on-tertiary-container font-medium mt-1">85.1% collection</p>
+</div>
+</div>
+<!-- Pending Bills -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Pending Bills</span>
+<div class="w-7 h-7 rounded-lg bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-error">pending_actions</span>
+</div>
+</div>
+<div class="mt-2">
+<span class="font-metric-num-lg text-metric-num-lg text-on-surface tracking-tight">186</span>
+<p class="font-label-sm text-label-sm text-error font-medium mt-1">₹2,14,350 at stake</p>
+</div>
+</div>
+<!-- Consumption Load -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between col-span-2 sm:col-span-1">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Total Power Draw</span>
+<div class="w-7 h-7 rounded-lg bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-secondary">power</span>
+</div>
+</div>
+<div class="mt-2">
+<span class="font-metric-num-lg text-metric-num-lg text-on-surface tracking-tight">48,320 <span class="font-body-sm text-body-sm text-on-surface-variant">kWh</span></span>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">-2.4% vs peak summer</p>
+</div>
+</div>
+</div>
+<!-- Interactive Telemetry & Revenue Charts Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Revenue Bar Chart Component -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-4">
+<div>
+<h2 class="font-title-lg text-title-lg text-on-surface">Revenue Trend (Last 6 Months)</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Collections in Lakhs (INR)</p>
+</div>
+<span class="material-symbols-outlined text-secondary text-[22px]">bar_chart</span>
+</div>
+<!-- Visual Bar Chart -->
+<div class="h-44 flex items-end justify-between gap-2 pt-4 px-2 bg-surface-container-low rounded-lg">
+<!-- Nov -->
+<div class="flex flex-col items-center flex-1 h-full justify-end group cursor-pointer">
+<span class="font-label-sm text-[10px] text-on-surface-variant mb-1 group-hover:font-bold">7.4L</span>
+<div class="w-full bg-secondary-fixed-dim group-hover:bg-secondary rounded-t-sm transition-all" style="height: 65%;"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-2">Nov</span>
+</div>
+<!-- Dec -->
+<div class="flex flex-col items-center flex-1 h-full justify-end group cursor-pointer">
+<span class="font-label-sm text-[10px] text-on-surface-variant mb-1 group-hover:font-bold">7.9L</span>
+<div class="w-full bg-secondary-fixed-dim group-hover:bg-secondary rounded-t-sm transition-all" style="height: 73%;"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-2">Dec</span>
+</div>
+<!-- Jan -->
+<div class="flex flex-col items-center flex-1 h-full justify-end group cursor-pointer">
+<span class="font-label-sm text-[10px] text-on-surface-variant mb-1 group-hover:font-bold">8.1L</span>
+<div class="w-full bg-secondary-fixed-dim group-hover:bg-secondary rounded-t-sm transition-all" style="height: 77%;"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-2">Jan</span>
+</div>
+<!-- Feb -->
+<div class="flex flex-col items-center flex-1 h-full justify-end group cursor-pointer">
+<span class="font-label-sm text-[10px] text-on-surface-variant mb-1 group-hover:font-bold">7.8L</span>
+<div class="w-full bg-secondary-fixed-dim group-hover:bg-secondary rounded-t-sm transition-all" style="height: 71%;"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-2">Feb</span>
+</div>
+<!-- Mar -->
+<div class="flex flex-col items-center flex-1 h-full justify-end group cursor-pointer">
+<span class="font-label-sm text-[10px] text-on-surface-variant mb-1 group-hover:font-bold">8.2L</span>
+<div class="w-full bg-secondary-fixed-dim group-hover:bg-secondary rounded-t-sm transition-all" style="height: 80%;"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-2">Mar</span>
+</div>
+<!-- Apr (Active) -->
+<div class="flex flex-col items-center flex-1 h-full justify-end group cursor-pointer">
+<span class="font-label-sm text-[10px] text-secondary font-bold mb-1">8.45L</span>
+<div class="w-full bg-primary rounded-t-sm transition-all" style="height: 88%;"></div>
+<span class="font-label-sm text-label-sm text-primary font-bold mt-2">Apr</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-3 pt-2 text-on-surface-variant font-label-sm text-label-sm">
+<span class="">Average: ₹7.97L / mo</span>
+<span class="text-tertiary-container font-semibold">+3.04% vs Mar</span>
+</div>
+</div>
+<!-- Donut Chart & Peak Load Curve Split -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<div>
+<h2 class="font-title-lg text-title-lg text-on-surface">Billing Health &amp; Load Cycle</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Breakdown across 1,282 total billings</p>
+</div>
+<span class="material-symbols-outlined text-secondary text-[22px]">pie_chart</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm items-center my-auto">
+<!-- SVG Donut Chart -->
+<div class="flex flex-col items-center justify-center relative">
+<svg class="w-32 h-32 -rotate-90" viewBox="0 0 36 36">
+<!-- Background circle -->
+<circle cx="18" cy="18" fill="transparent" r="14" stroke="#eff4ff" stroke-width="4.5"></circle>
+<!-- Paid (82.8%) stroke-dasharray="72.8 100" -->
+<circle cx="18" cy="18" fill="transparent" r="14" stroke="#1fa072" stroke-dasharray="72.8 100" stroke-dashoffset="0" stroke-width="4.5"></circle>
+<!-- Pending (14.5%) stroke-dasharray="12.7 100" -->
+<circle cx="18" cy="18" fill="transparent" r="14" stroke="#5bb8fe" stroke-dasharray="12.7 100" stroke-dashoffset="-72.8" stroke-width="4.5"></circle>
+<!-- Overdue (2.7%) stroke-dasharray="4.5 100" -->
+<circle cx="18" cy="18" fill="transparent" r="14" stroke="#ba1a1a" stroke-dasharray="4.5 100" stroke-dashoffset="-85.5" stroke-width="4.5"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+<span class="font-headline-md text-headline-md text-primary">85%</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase">Settled</span>
+</div>
+</div>
+<!-- Donut Legend & Real-time load readout -->
+<div class="space-y-2">
+<div class="flex items-center justify-between text-on-surface">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-on-tertiary-container"></span>
+<span class="font-label-md text-label-md">Paid</span>
+</div>
+<span class="font-label-md text-label-md font-bold">1,062</span>
+</div>
+<div class="flex items-center justify-between text-on-surface">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary-container"></span>
+<span class="font-label-md text-label-md">Pending</span>
+</div>
+<span class="font-label-md text-label-md font-bold">186</span>
+</div>
+<div class="flex items-center justify-between text-on-surface">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-error"></span>
+<span class="font-label-md text-label-md">Overdue</span>
+</div>
+<span class="font-label-md text-label-md font-bold text-error">34</span>
+</div>
+<!-- Micro Sparkline load curve -->
+<div class="pt-2">
+<div class="flex justify-between items-center text-[10px] text-on-surface-variant font-label-sm mb-1">
+<span class="">Peak Demand Curve</span>
+<span class="text-primary font-bold">48.3k kWh</span>
+</div>
+<svg class="w-full h-8" fill="none" viewBox="0 0 100 24">
+<path d="M0 20 Q 15 18, 30 12 T 60 4 T 85 10 T 100 8" fill="none" stroke="#006398" stroke-linecap="round" stroke-width="2.5"></path>
+<path d="M0 20 Q 15 18, 30 12 T 60 4 T 85 10 T 100 8 L 100 24 L 0 24 Z" fill="rgba(91, 184, 254, 0.25)"></path>
+</svg>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-2 rounded-lg flex items-center justify-between mt-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">flash_on</span> Phase 1 Load Normal
+        </span>
+<span class="font-label-sm text-label-sm font-bold text-primary">238 V Stable</span>
+</div>
+</div>
+</div>
+<!-- Recent Bills Management Section -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-space-md">
+<!-- Header with Filters -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Recent Consumer Invoices</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Live metering cycle Apr 2024 billing records</p>
+</div>
+<!-- Filter Chips Group -->
+<div class="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0" id="filter-container">
+<button class="filter-btn px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all bg-primary text-on-primary font-bold" onclick="filterBills('all', this)" type="button">
+          All (1,248)
+        </button>
+<button class="filter-btn px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all bg-surface-container text-on-surface-variant hover:text-on-surface" onclick="filterBills('pending', this)" type="button">
+          Pending (186)
+        </button>
+<button class="filter-btn px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all bg-surface-container text-on-surface-variant hover:text-on-surface" onclick="filterBills('paid', this)" type="button">
+          Paid (1,062)
+        </button>
+<button class="filter-btn px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all bg-surface-container text-on-surface-variant hover:text-on-surface" onclick="filterBills('overdue', this)" type="button">
+          Overdue (34)
+        </button>
+</div>
+</div>
+<!-- Bills Feed (Responsive Cards / Table Layout) -->
+<div class="space-y-space-sm" id="bills-feed">
+<!-- Bill 1: Arun Kumar (Paid) -->
+<div class="bill-card bg-surface-container-low rounded-lg p-space-md flex flex-col md:flex-row md:items-center justify-between gap-space-sm transition-all" data-status="paid">
+<div class="flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-lowest flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px] text-secondary">person</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title-lg text-title-lg text-on-surface">Arun Kumar</span>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-bold">Paid</span>
+</div>
+<div class="flex flex-wrap items-center gap-x-2 text-on-surface-variant font-label-sm text-label-sm mt-0.5">
+<span class="">Bill #BL-2024-0401</span>
+<span class="">•</span>
+<span class="">Meter #MTR-88210</span>
+<span class="">•</span>
+<span class="">Apr 2024</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between md:justify-end gap-space-md pt-2 md:pt-0">
+<div class="text-left md:text-right">
+<span class="font-body-sm text-body-sm text-on-surface-variant">340 kWh</span>
+<div class="font-title-lg text-title-lg font-bold text-on-surface">₹2,840</div>
+<span class="font-label-sm text-[11px] text-tertiary-container font-medium">Cleared on 24 Apr</span>
+</div>
+<div class="flex items-center gap-1 shrink-0">
+<button class="h-9 px-3 rounded bg-surface-container-lowest text-primary hover:bg-surface-container font-label-sm text-label-sm flex items-center gap-1 active:scale-95 transition-all" title="View Bill" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span class="hidden xs:inline">View</span>
+</button>
+<button class="h-9 px-2.5 rounded bg-surface-container-lowest text-secondary font-label-sm text-label-sm flex items-center active:scale-95 transition-all" title="Receipt" type="button">
+<span class="material-symbols-outlined text-[16px]">receipt</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Bill 2: Priya Sharma (Pending) -->
+<div class="bill-card bg-surface-container-low rounded-lg p-space-md flex flex-col md:flex-row md:items-center justify-between gap-space-sm transition-all" data-status="pending">
+<div class="flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-lowest flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px] text-secondary">person</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title-lg text-title-lg text-on-surface">Priya Sharma</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-bold">Pending</span>
+</div>
+<div class="flex flex-wrap items-center gap-x-2 text-on-surface-variant font-label-sm text-label-sm mt-0.5">
+<span class="">Bill #BL-2024-0402</span>
+<span class="">•</span>
+<span class="">Meter #MTR-77319</span>
+<span class="">•</span>
+<span class="">Apr 2024</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between md:justify-end gap-space-md pt-2 md:pt-0">
+<div class="text-left md:text-right">
+<span class="font-body-sm text-body-sm text-on-surface-variant">480 kWh</span>
+<div class="font-title-lg text-title-lg font-bold text-on-surface">₹4,390</div>
+<span class="font-label-sm text-[11px] text-on-secondary-container">Due: 25 Apr</span>
+</div>
+<div class="flex items-center gap-1 shrink-0">
+<button class="h-9 px-3 rounded bg-primary text-on-primary hover:bg-primary-container font-label-sm text-label-sm flex items-center gap-1 active:scale-95 transition-all" onclick="markPaid(this)" type="button">
+<span class="material-symbols-outlined text-[16px]">check</span>
+<span class="">Mark Paid</span>
+</button>
+<button class="h-9 px-2.5 rounded bg-surface-container-lowest text-secondary hover:bg-secondary-fixed font-label-sm text-label-sm flex items-center active:scale-95 transition-all" onclick="sendReminder('Priya Sharma')" title="Send SMS Reminder" type="button">
+<span class="material-symbols-outlined text-[16px]">sms</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Bill 3: Karthik Raman (Overdue) -->
+<div class="bill-card bg-surface-container-low rounded-lg p-space-md flex flex-col md:flex-row md:items-center justify-between gap-space-sm transition-all" data-status="overdue">
+<div class="flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-lowest flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px] text-error">priority_high</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title-lg text-title-lg text-on-surface">Karthik Raman</span>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-bold">Overdue</span>
+</div>
+<div class="flex flex-wrap items-center gap-x-2 text-on-surface-variant font-label-sm text-label-sm mt-0.5">
+<span class="">Bill #BL-2024-0403</span>
+<span class="">•</span>
+<span class="">Meter #MTR-66102</span>
+<span class="">•</span>
+<span class="">Apr 2024</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between md:justify-end gap-space-md pt-2 md:pt-0">
+<div class="text-left md:text-right">
+<span class="font-body-sm text-body-sm text-on-surface-variant">195 kWh</span>
+<div class="font-title-lg text-title-lg font-bold text-error">₹1,420</div>
+<span class="font-label-sm text-[11px] text-error font-medium">Due was: 18 Apr</span>
+</div>
+<div class="flex items-center gap-1 shrink-0">
+<button class="h-9 px-3 rounded bg-primary text-on-primary hover:bg-primary-container font-label-sm text-label-sm flex items-center gap-1 active:scale-95 transition-all" onclick="markPaid(this)" type="button">
+<span class="material-symbols-outlined text-[16px]">check</span>
+<span class="">Mark Paid</span>
+</button>
+<button class="h-9 px-2.5 rounded bg-error-container text-on-error-container hover:opacity-90 font-label-sm text-label-sm flex items-center active:scale-95 transition-all" onclick="sendReminder('Karthik Raman')" title="Send Urgent SMS" type="button">
+<span class="material-symbols-outlined text-[16px]">send_to_mobile</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Bill 4: Divya Nair (Paid) -->
+<div class="bill-card bg-surface-container-low rounded-lg p-space-md flex flex-col md:flex-row md:items-center justify-between gap-space-sm transition-all" data-status="paid">
+<div class="flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-lowest flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px] text-secondary">person</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title-lg text-title-lg text-on-surface">Divya Nair</span>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-bold">Paid</span>
+</div>
+<div class="flex flex-wrap items-center gap-x-2 text-on-surface-variant font-label-sm text-label-sm mt-0.5">
+<span class="">Bill #BL-2024-0404</span>
+<span class="">•</span>
+<span class="">Meter #MTR-55490</span>
+<span class="">•</span>
+<span class="">Apr 2024</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between md:justify-end gap-space-md pt-2 md:pt-0">
+<div class="text-left md:text-right">
+<span class="font-body-sm text-body-sm text-on-surface-variant">620 kWh</span>
+<div class="font-title-lg text-title-lg font-bold text-on-surface">₹5,980</div>
+<span class="font-label-sm text-[11px] text-tertiary-container font-medium">Cleared on 20 Apr</span>
+</div>
+<div class="flex items-center gap-1 shrink-0">
+<button class="h-9 px-3 rounded bg-surface-container-lowest text-primary hover:bg-surface-container font-label-sm text-label-sm flex items-center gap-1 active:scale-95 transition-all" title="View Bill" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span class="hidden xs:inline">View</span>
+</button>
+<button class="h-9 px-2.5 rounded bg-surface-container-lowest text-secondary font-label-sm text-label-sm flex items-center active:scale-95 transition-all" title="Receipt" type="button">
+<span class="material-symbols-outlined text-[16px]">receipt</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Bill 5: Sanjay Patel (Pending) -->
+<div class="bill-card bg-surface-container-low rounded-lg p-space-md flex flex-col md:flex-row md:items-center justify-between gap-space-sm transition-all" data-status="pending">
+<div class="flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-lowest flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px] text-secondary">person</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title-lg text-title-lg text-on-surface">Sanjay Patel</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-bold">Pending</span>
+</div>
+<div class="flex flex-wrap items-center gap-x-2 text-on-surface-variant font-label-sm text-label-sm mt-0.5">
+<span class="">Bill #BL-2024-0405</span>
+<span class="">•</span>
+<span class="">Meter #MTR-44218</span>
+<span class="">•</span>
+<span class="">Apr 2024</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between md:justify-end gap-space-md pt-2 md:pt-0">
+<div class="text-left md:text-right">
+<span class="font-body-sm text-body-sm text-on-surface-variant">280 kWh</span>
+<div class="font-title-lg text-title-lg font-bold text-on-surface">₹2,240</div>
+<span class="font-label-sm text-[11px] text-on-secondary-container">Due: 29 Apr</span>
+</div>
+<div class="flex items-center gap-1 shrink-0">
+<button class="h-9 px-3 rounded bg-primary text-on-primary hover:bg-primary-container font-label-sm text-label-sm flex items-center gap-1 active:scale-95 transition-all" onclick="markPaid(this)" type="button">
+<span class="material-symbols-outlined text-[16px]">check</span>
+<span class="">Mark Paid</span>
+</button>
+<button class="h-9 px-2.5 rounded bg-surface-container-lowest text-secondary hover:bg-secondary-fixed font-label-sm text-label-sm flex items-center active:scale-95 transition-all" onclick="sendReminder('Sanjay Patel')" title="Send SMS Reminder" type="button">
+<span class="material-symbols-outlined text-[16px]">sms</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination & Bulk Download -->
+<div class="flex flex-col sm:flex-row items-center justify-between pt-2 gap-space-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Showing 5 of 1,248 total billing records</span>
+<div class="flex items-center gap-2">
+<button class="h-9 px-3 rounded bg-surface-container text-on-surface font-label-sm text-label-sm hover:bg-surface-container-high transition-colors" type="button">Export CSV</button>
+<button class="h-9 px-3 rounded bg-surface-container text-on-surface font-label-sm text-label-sm hover:bg-surface-container-high transition-colors" type="button">Next Page →</button>
+</div>
+</div>
+</div>
+<!-- Micro Toast Notification for UX micro-interactions -->
+<div class="fixed bottom-20 left-1/2 -translate-x-1/2 bg-primary text-on-primary px-4 py-2.5 rounded-lg shadow-xl text-label-md font-label-md flex items-center gap-2 opacity-0 pointer-events-none transition-all duration-300 z-50" id="toast-banner">
+<span class="material-symbols-outlined text-secondary-container text-[18px]">check_circle</span>
+<span id="toast-msg" class="">Action completed</span>
+</div>
+</div>
+<script>
+  function filterBills(status, btnElement) {
+    const buttons = document.querySelectorAll('.filter-btn');
+    buttons.forEach(btn => {
+      btn.className = 'filter-btn px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all bg-surface-container text-on-surface-variant hover:text-on-surface';
+    });
+    btnElement.className = 'filter-btn px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-all bg-primary text-on-primary font-bold';
+
+    const cards = document.querySelectorAll('.bill-card');
+    cards.forEach(card => {
+      if (status === 'all' || card.getAttribute('data-status') === status) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  function showToast(msg) {
+    const toast = document.getElementById('toast-banner');
+    const label = document.getElementById('toast-msg');
+    label.innerText = msg;
+    toast.classList.remove('opacity-0', 'pointer-events-none');
+    toast.classList.add('opacity-100');
+    setTimeout(() => {
+      toast.classList.remove('opacity-100');
+      toast.classList.add('opacity-0', 'pointer-events-none');
+    }, 2800);
+  }
+
+  function markPaid(btn) {
+    const card = btn.closest('.bill-card');
+    card.setAttribute('data-status', 'paid');
+    const badge = card.querySelector('span[class*="rounded-full"]');
+    if (badge) {
+      badge.textContent = 'Paid';
+      badge.className = 'px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-bold';
+    }
+    btn.innerHTML = '<span class="material-symbols-outlined text-[16px] text-tertiary-fixed">done_all</span><span>Settled</span>';
+    btn.classList.replace('bg-primary', 'bg-tertiary-container');
+    showToast('Payment marked as received & receipt logged');
+  }
+
+  function sendReminder(name) {
+    showToast('SMS reminder dispatched to ' + name);
+  }
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-1px_12px_rgba(0,0,0,0.04)]" data-active-classes="text-secondary font-bold"><div class="h-16 px-space-xs flex items-center justify-around"><a aria-current="page" class="flex flex-col items-center justify-center flex-1 h-14 min-w-[44px] transition-colors text-secondary font-bold" data-path="admin-dashboard" href="#"><span class="material-symbols-outlined text-[22px]">dashboard</span><span class="font-label-sm text-[11px] leading-tight mt-0.5">Dashboard</span></a><a class="flex flex-col items-center justify-center flex-1 h-14 min-w-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="bills-invoice" href="#"><span class="material-symbols-outlined text-[22px]">receipt_long</span><span class="font-label-sm text-[11px] leading-tight mt-0.5">Bills</span></a><a class="flex flex-col items-center justify-center flex-1 h-14 min-w-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="meter-readings" href="#"><span class="material-symbols-outlined text-[22px]">speed</span><span class="font-label-sm text-[11px] leading-tight mt-0.5">Readings</span></a><a class="flex flex-col items-center justify-center flex-1 h-14 min-w-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="customers" href="#"><span class="material-symbols-outlined text-[22px]">group</span><span class="font-label-sm text-[11px] leading-tight mt-0.5">Customers</span></a><button aria-label="Toggle Menu" class="flex flex-col items-center justify-center flex-1 h-14 min-w-[44px] text-on-surface-variant hover:text-on-surface transition-colors" onclick="document.getElementById('side-drawer').classList.remove('-translate-x-full');document.getElementById('drawer-overlay').classList.remove('opacity-0','pointer-events-none');" type="button"><span class="material-symbols-outlined text-[22px]">menu_open</span><span class="font-label-sm text-[11px] leading-tight mt-0.5">Menu</span></button></div></nav>
+
+<script>
+  (function initDashboardNavigation() {
+    const routes = {
+      'admin-dashboard': '../admin_dashboard/code.html',
+      'bills-invoice': '../bill_generation_invoice/code.html',
+      'meter-readings': '../meter_readings/code.html',
+      'customers': '../customer_management/code.html',
+      'meters': '../meter_management/code.html',
+      'payments': '../payments_management/code.html',
+      'dashboard': '../admin_dashboard/code.html',
+      'bills': '../bill_generation_invoice/code.html',
+      'readings': '../meter_readings/code.html',
+      'users': '../customer_management/code.html',
+      'consumers': '../customer_management/code.html',
+      'profile': '../customer_portal_consumption/code.html'
+    };
+
+    document.querySelectorAll('[data-path]').forEach((element) => {
+      const path = element.dataset.path;
+      const target = routes[path];
+      if (!target) return;
+
+      element.addEventListener('click', (event) => {
+        event.preventDefault();
+        window.location.href = target;
+      });
+    });
+
+    document.querySelectorAll('a[href="#"]').forEach((element) => {
+      const target = routes[element.dataset.path || ''];
+      if (!target) return;
+      element.addEventListener('click', (event) => {
+        event.preventDefault();
+        window.location.href = target;
+      });
+    });
+  })();
+</script>
+</body></html>

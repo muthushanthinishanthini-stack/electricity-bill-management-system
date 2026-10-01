@@ -1,0 +1,465 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_tab" name="shell-type"><title>Electricity Bill Management System</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{width:100%;margin:0;padding:0;min-height:100%;}body{overscroll-behavior-y:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "tertiary-container": "#002d1d", "on-secondary-container": "#00476e", "error-container": "#ffdad6", "on-tertiary-fixed": "#002114", "inverse-on-surface": "#eaf1ff", "surface-container-high": "#dce9ff", "primary": "#001229", "on-secondary": "#ffffff", "primary-fixed-dim": "#b2c8ed", "surface": "#f8f9ff", "error": "#ba1a1a", "on-error-container": "#93000a", "on-surface-variant": "#44474d", "outline-variant": "#c4c6ce", "surface-container-lowest": "#ffffff", "tertiary-fixed-dim": "#68dba9", "on-primary-fixed-variant": "#324866", "on-tertiary-fixed-variant": "#005137", "surface-dim": "#cbdbf5", "surface-container-highest": "#d3e4fe", "secondary-container": "#5bb8fe", "on-tertiary-container": "#1fa072", "tertiary": "#00160c", "on-primary": "#ffffff", "outline": "#74777e", "on-primary-container": "#798fb1", "surface-container": "#e5eeff", "surface-bright": "#f8f9ff", "on-tertiary": "#ffffff", "secondary": "#006398", "tertiary-fixed": "#85f8c4", "surface-variant": "#d3e4fe", "on-error": "#ffffff", "on-surface": "#0b1c30", "secondary-fixed": "#cce5ff", "on-primary-fixed": "#021c39", "surface-container-low": "#eff4ff", "inverse-surface": "#213145", "secondary-fixed-dim": "#93ccff", "on-background": "#0b1c30", "surface-tint": "#4a5f7f", "inverse-primary": "#b2c8ed", "on-secondary-fixed-variant": "#004b73", "background": "#f8f9ff", "primary-fixed": "#d4e3ff", "on-secondary-fixed": "#001d31", "primary-container": "#0f2744" }, borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, spacing: { "space-sm": "0.5rem", "gutter": "1rem", "space-md": "1rem", "space-xs": "0.25rem", "margin-desktop": "2rem", "space-lg": "1.5rem", "gutter-desktop": "1.5rem", "space-xl": "2rem", "margin": "1rem" }, fontFamily: { "body-md": ["Hanken Grotesk"], "label-md": ["Hanken Grotesk"], "display-lg": ["Manrope"], "headline-lg": ["Manrope"], "metric-num-lg": ["Hanken Grotesk"], "title-lg": ["Manrope"], "display-lg-mobile": ["Manrope"], "headline-md": ["Manrope"], "body-sm": ["Hanken Grotesk"], "metric-num-md": ["Hanken Grotesk"], "label-sm": ["Hanken Grotesk"], "headline-xl": ["Manrope"], "body-lg": ["Hanken Grotesk"] }, fontSize: { "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "label-md": ["13px", { "lineHeight": "18px", "fontWeight": "500" }], "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "700" }], "headline-lg": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "metric-num-lg": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "title-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }], "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-md": ["18px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }], "metric-num-md": ["20px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface flex flex-col min-h-screen relative antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-gutter flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><button aria-label="Open Navigation Drawer" class="w-11 h-11 flex items-center justify-center text-on-surface hover:text-secondary rounded-lg active:scale-95 transition-all" onclick="document.getElementById('side-drawer').classList.remove('-translate-x-full');document.getElementById('drawer-overlay').classList.remove('opacity-0','pointer-events-none');" type="button"><span class="material-symbols-outlined text-[24px]">menu</span></button><img alt="Electricity Bill Management System Logo" class="h-8 w-auto object-contain shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1UHrVYwUFG-_MWAjb045klccl6AzLpsGZFlc_CoHfj2ifHKTAnqw631GbVUW3xOYGvMCC22BHyyYk1hpnr38SUFvj49cMxaRZeQSaMF6y-R67YQnAGADSXOIYgEz3x2PGbxefu7Xp2Vx_tm-34rhsgNnjaDqCu4uRys6dqhbcFG4snf246eQ9GuspmOTG40KClG2g1jUbY-Ke-Si6YaHtwmK84b94btCYczuKthk5UjWdg0k9nqb6up3ZTV"><div class="flex flex-col min-w-0"><span class="font-title-lg text-title-lg text-primary truncate leading-tight font-bold">Electricity Bill</span><span class="font-label-sm text-label-sm text-secondary truncate font-semibold uppercase tracking-wider">Management System</span></div></div><div class="flex items-center gap-space-xs shrink-0"><span class="hidden xs:inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm tracking-normal uppercase">Admin</span><button aria-label="Notifications" class="relative w-11 h-11 flex items-center justify-center text-on-surface-variant hover:text-on-surface active:scale-95 transition-all" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2 right-2 flex items-center justify-center min-w-[16px] h-4 px-1 rounded-full bg-error text-on-error font-label-sm text-[10px] font-bold leading-none">3</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><div class="fixed inset-0 z-50 bg-primary/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300" id="drawer-overlay" onclick="document.getElementById('side-drawer').classList.add('-translate-x-full');this.classList.add('opacity-0','pointer-events-none');"></div><aside class="fixed top-0 left-0 bottom-0 z-50 w-72 max-w-[80vw] bg-surface-container-lowest shadow-[0_4px_24px_rgba(0,18,41,0.12)] -translate-x-full transition-transform duration-300 flex flex-col pt-safe pb-safe" id="side-drawer"><div class="h-16 px-gutter flex items-center justify-between bg-surface-container-low"><div class="flex items-center gap-space-sm"><img alt="Electricity Bill Management System Logo" class="h-7 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UHrVYwUFG-_MWAjb045klccl6AzLpsGZFlc_CoHfj2ifHKTAnqw631GbVUW3xOYGvMCC22BHyyYk1hpnr38SUFvj49cMxaRZeQSaMF6y-R67YQnAGADSXOIYgEz3x2PGbxefu7Xp2Vx_tm-34rhsgNnjaDqCu4uRys6dqhbcFG4snf246eQ9GuspmOTG40KClG2g1jUbY-Ke-Si6YaHtwmK84b94btCYczuKthk5UjWdg0k9nqb6up3ZTV"><span class="font-title-lg text-title-lg text-primary">Electricity Bill Management System</span></div><button aria-label="Close Drawer" class="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:text-on-surface" onclick="document.getElementById('side-drawer').classList.add('-translate-x-full');document.getElementById('drawer-overlay').classList.add('opacity-0','pointer-events-none');" type="button"><span class="material-symbols-outlined text-[22px]">close</span></button></div><div class="px-gutter py-space-sm bg-surface-container-low"><div class="flex items-center justify-between p-space-xs bg-surface rounded-lg"><span class="font-label-sm text-label-sm text-on-surface-variant px-space-xs">Active Role:</span><button class="flex items-center gap-1 px-2.5 py-1 rounded bg-primary text-on-primary font-label-sm text-label-sm" type="button"><span class="material-symbols-outlined text-[14px]">swap_horiz</span>Admin</button></div></div><nav class="flex-1 overflow-y-auto px-space-sm py-space-md space-y-1" data-active-classes="bg-secondary-fixed text-on-secondary-fixed font-semibold"><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="login-switch-role" href="#"><span class="material-symbols-outlined text-[22px]">manage_accounts</span><span class="font-label-md text-label-md">Login / Switch Role</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="admin-dashboard" href="#"><span class="material-symbols-outlined text-[22px]">dashboard</span><span class="font-label-md text-label-md">Admin Dashboard</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="customers" href="#"><span class="material-symbols-outlined text-[22px]">group</span><span class="font-label-md text-label-md">Customers</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="meters" href="#"><span class="material-symbols-outlined text-[22px]">electric_meter</span><span class="font-label-md text-label-md">Meters</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="meter-readings" href="#"><span class="material-symbols-outlined text-[22px]">speed</span><span class="font-label-md text-label-md">Meter Readings</span></a><a aria-current="page" class="flex items-center gap-space-md px-space-md h-12 rounded-lg transition-all bg-secondary-fixed text-on-secondary-fixed font-semibold" data-path="bills-invoice" href="#"><span class="material-symbols-outlined text-[22px]">receipt_long</span><span class="font-label-md text-label-md">Bills &amp; Invoice</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="payments" href="#"><span class="material-symbols-outlined text-[22px]">payments</span><span class="font-label-md text-label-md">Payments</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="tariff-slabs" href="#"><span class="material-symbols-outlined text-[22px]">stacked_bar_chart</span><span class="font-label-md text-label-md">Tariff Slabs</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="reports" href="#"><span class="material-symbols-outlined text-[22px]">analytics</span><span class="font-label-md text-label-md">Reports</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="customer-portal" href="#"><span class="material-symbols-outlined text-[22px]">account_circle</span><span class="font-label-md text-label-md">Customer Portal</span></a></nav><div class="p-gutter bg-surface-container-low flex items-center justify-between"><div class="flex items-center gap-space-xs"><div class="w-2.5 h-2.5 rounded-full bg-tertiary-fixed-dim"></div><span class="font-label-sm text-label-sm text-on-surface-variant">Grid Telemetry Online</span></div><span class="font-label-sm text-label-sm text-secondary font-bold">v3.4.1</span></div></aside><main class="flex-1 flex flex-col relative w-full pt-16 pb-20 bg-surface min-h-[calc(100vh-5rem)]"><div class="flex flex-col w-full px-gutter pb-space-xl space-y-space-md">
+<!-- Interactive Utility Action Toolbar -->
+<div class="w-full bg-surface-container-lowest p-space-sm rounded-xl shadow-sm flex flex-col gap-space-xs sm:flex-row sm:items-center sm:justify-between">
+<div class="flex items-center gap-space-xs overflow-x-auto pb-space-xs sm:pb-0">
+<button class="inline-flex items-center gap-1.5 px-3 py-2 bg-surface-container hover:bg-surface-container-high text-on-surface rounded-lg transition-colors font-label-md text-label-md shrink-0 active:scale-95" onclick="window.print()" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">print</span>
+<span class="">Print Bill</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3 py-2 bg-surface-container hover:bg-surface-container-high text-on-surface rounded-lg transition-colors font-label-md text-label-md shrink-0 active:scale-95" onclick="triggerToast('Downloading official encrypted PDF...')" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">picture_as_pdf</span>
+<span class="">Download PDF</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3 py-2 bg-surface-container hover:bg-surface-container-high text-on-surface rounded-lg transition-colors font-label-md text-label-md shrink-0 active:scale-95" onclick="triggerToast('Dispatching invoice link via SMS &amp; Email...')" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">forward_to_inbox</span>
+<span class="">Send SMS / Email</span>
+</button>
+</div>
+<button class="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-primary text-on-primary rounded-lg font-label-md text-label-md transition-colors hover:bg-primary-container active:scale-95 shrink-0 shadow-sm" onclick="triggerToast('Viewing receipt for Transaction #TXN-998248102')" type="button">
+<span class="material-symbols-outlined text-[18px] text-tertiary-fixed">receipt</span>
+<span class="">Record / Settle Payment</span>
+</button>
+</div>
+<!-- Toast Notification Bar (Micro-interaction) -->
+<div class="hidden w-full bg-primary text-on-primary px-space-md py-space-sm rounded-lg shadow-md flex items-center justify-between transition-all" id="interactive-toast">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-container text-[20px]">bolt</span>
+<span class="font-body-sm text-body-sm text-surface-container-lowest" id="toast-message">Action completed.</span>
+</div>
+<button class="text-surface-container-high hover:text-surface-bright" onclick="document.getElementById('interactive-toast').classList.add('hidden')" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<!-- Official Electricity Bill Invoice Document Card -->
+<div class="w-full bg-surface-container-lowest rounded-xl shadow-md overflow-hidden flex flex-col relative">
+<!-- Top Decorative Sovereign Tricolor Stripe Accent -->
+<div class="w-full h-1.5 bg-gradient-to-r from-secondary via-secondary-container to-tertiary-fixed-dim"></div>
+<!-- Official Header Segment -->
+<div class="p-space-md bg-surface-container-low flex flex-col gap-space-sm relative">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<img alt="Electricity Bill Management System Logo" class="w-12 h-12 object-contain rounded-lg p-1 bg-surface-container-lowest shadow-sm shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1UHrVYwUFG-_MWAjb045klccl6AzLpsGZFlc_CoHfj2ifHKTAnqw631GbVUW3xOYGvMCC22BHyyYk1hpnr38SUFvj49cMxaRZeQSaMF6y-R67YQnAGADSXOIYgEz3x2PGbxefu7Xp2Vx_tm-34rhsgNnjaDqCu4uRys6dqhbcFG4snf246eQ9GuspmOTG40KClG2g1jUbY-Ke-Si6YaHtwmK84b94btCYczuKthk5UjWdg0k9nqb6up3ZTV">
+<div class="flex flex-col min-w-0">
+<span class="font-headline-md text-headline-md text-primary leading-tight font-bold">Maharashtra State Electricity Distribution Co. Ltd.</span>
+<span class="font-label-md text-label-md text-secondary font-semibold">Electricity Bill Management System</span>
+</div>
+</div>
+<div class="hidden sm:flex flex-col items-end text-right shrink-0">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider font-semibold">LT Domestic</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Form 10-B (Reg. 14)</span>
+</div>
+</div>
+<!-- Statutory Metadata Strip -->
+<div class="flex flex-wrap items-center gap-x-space-md gap-y-1 pt-space-xs font-label-sm text-label-sm text-on-surface-variant">
+<span class=""><strong class="text-on-surface">GSTIN:</strong> 27AAECM1234F1Z5</span>
+<span class="">•</span>
+<span class=""><strong class="text-on-surface">CIN:</strong> U40109MH2005SGC153645</span>
+<span class="">•</span>
+<span class=""><strong class="text-on-surface">Division:</strong> Pune Urban Circle (Zone 4)</span>
+</div>
+</div>
+<!-- Bill Tracking Bar -->
+<div class="grid grid-cols-3 bg-surface-container p-space-sm text-center">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Bill Number</span>
+<span class="font-title-lg text-title-lg text-primary font-bold tracking-tight">BL-2024-0401</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Bill Date</span>
+<span class="font-title-lg text-title-lg text-primary font-bold">15 Apr 2024</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-error uppercase font-semibold">Due Date</span>
+<span class="font-title-lg text-title-lg text-error font-bold">28 Apr 2024</span>
+</div>
+</div>
+<!-- Settlement Hologram / Status Rubber-Stamp Overlay -->
+<div class="px-space-md pt-space-md">
+<div class="bg-secondary-fixed/50 p-space-sm rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs shadow-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[24px]">verified</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-secondary-fixed font-bold tracking-wide uppercase">Settled • Bill Paid</span>
+<span class="font-body-sm text-body-sm text-on-secondary-fixed-variant">Ref #TXN-998248102 • 16 Apr 2024 at 10:14 AM via UPI</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm font-semibold">Instant Receipt Available</span>
+</div>
+</div>
+</div>
+<!-- Consumer Identity & Service Parameters -->
+<div class="p-space-md grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Consumer Card -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">Consumer Profile</span>
+<span class="material-symbols-outlined text-secondary text-[18px]">badge</span>
+</div>
+<p class="font-headline-md text-headline-md text-primary font-bold">Arun Kumar</p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 leading-snug">Flat 402, Shanti Vihar, Koregaon Park, Pune, Maharashtra - 411038</p>
+</div>
+<div class="grid grid-cols-2 gap-space-xs mt-space-md pt-space-xs">
+<div class="bg-surface-container-lowest p-2 rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Consumer No.</span>
+<span class="font-title-lg text-title-lg text-primary font-bold">CUST-1048</span>
+</div>
+<div class="bg-surface-container-lowest p-2 rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Meter Serial</span>
+<span class="font-title-lg text-title-lg text-primary font-bold">MTR-88210</span>
+</div>
+</div>
+</div>
+<!-- Connection Details Card -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">Tariff &amp; Technical Load</span>
+<span class="material-symbols-outlined text-secondary text-[18px]">electrical_services</span>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md text-on-surface-variant">Category:</span>
+<span class="font-title-lg text-title-lg text-primary font-semibold">LT-1 Domestic</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md text-on-surface-variant">Phase / Voltage:</span>
+<span class="font-body-md text-body-md text-on-surface font-medium">Single Phase 230V</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md text-on-surface-variant">Sanctioned Load:</span>
+<span class="font-body-md text-body-md text-on-surface font-medium">4.50 kW</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md text-on-surface-variant">Connected Feeder:</span>
+<span class="font-body-md text-body-md text-on-surface font-medium">KP-Express-F08</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between mt-space-md pt-2 bg-surface-container-lowest p-2 rounded-lg">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">schedule</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Billing Period:</span>
+</div>
+<span class="font-label-md text-label-md text-primary font-bold">14 Mar '24 → 14 Apr '24 (31 Days)</span>
+</div>
+</div>
+</div>
+<!-- Meter Reading Matrix Section -->
+<div class="px-space-md">
+<div class="bg-surface-container-high/60 rounded-xl p-space-md">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">speed</span>
+<span class="font-title-lg text-title-lg text-primary font-bold">Smart Meter Telemetry Log</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-semibold">Auto-Sync via AMR</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm">
+<div class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-col shadow-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Previous Reading (kWh)</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-metric-num-md text-metric-num-md text-primary font-bold tabular-nums">14,480</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">kWh</span>
+</div>
+<span class="font-label-sm text-[11px] text-on-surface-variant mt-0.5">Read: 14 Mar 2024</span>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-col shadow-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Current Reading (kWh)</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-metric-num-md text-metric-num-md text-secondary font-bold tabular-nums">14,820</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">kWh</span>
+</div>
+<span class="font-label-sm text-[11px] text-on-surface-variant mt-0.5">Read: 14 Apr 2024</span>
+</div>
+<div class="bg-primary text-on-primary p-space-sm rounded-lg flex flex-col shadow-sm">
+<span class="font-label-sm text-label-sm text-primary-fixed-dim">Total Units Billed</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-metric-num-md text-metric-num-md text-tertiary-fixed font-bold tabular-nums">340</span>
+<span class="font-body-sm text-body-sm text-on-primary">Units (kWh)</span>
+</div>
+<span class="font-label-sm text-[11px] text-primary-fixed-dim mt-0.5">Daily Avg: 10.96 kWh</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Detailed Tariff Slab Calculation Breakdown -->
+<div class="p-space-md">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">calculate</span>
+<span class="font-title-lg text-title-lg text-primary font-bold">Tariff Calculation Breakdown</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">MERC Order 2024-V2</span>
+</div>
+<!-- Slab Table Container -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm">
+<!-- Table Header -->
+<div class="grid grid-cols-12 bg-surface-container-low px-space-md py-space-xs font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">
+<div class="col-span-5 sm:col-span-6">Slab Description</div>
+<div class="col-span-3 sm:col-span-2 text-right">Units</div>
+<div class="col-span-2 sm:col-span-2 text-right">Rate (₹)</div>
+<div class="col-span-2 sm:col-span-2 text-right">Amount (₹)</div>
+</div>
+<!-- Slab Row 1 -->
+<div class="grid grid-cols-12 px-space-md py-2.5 items-center hover:bg-surface-container-low/50 transition-colors">
+<div class="col-span-5 sm:col-span-6 flex flex-col">
+<span class="font-body-md text-body-md text-primary font-medium">Slab 1: 0 to 100 units</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Lifeline domestic base</span>
+</div>
+<div class="col-span-3 sm:col-span-2 text-right font-body-md text-body-md text-on-surface tabular-nums">100</div>
+<div class="col-span-2 sm:col-span-2 text-right font-body-md text-body-md text-on-surface-variant tabular-nums">₹3.80</div>
+<div class="col-span-2 sm:col-span-2 text-right font-body-md text-body-md text-primary font-semibold tabular-nums">₹380.00</div>
+</div>
+<!-- Slab Row 2 -->
+<div class="grid grid-cols-12 px-space-md py-2.5 items-center bg-surface-container-low/30 hover:bg-surface-container-low/50 transition-colors">
+<div class="col-span-5 sm:col-span-6 flex flex-col">
+<span class="font-body-md text-body-md text-primary font-medium">Slab 2: 101 to 200 units</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Standard domestic tier</span>
+</div>
+<div class="col-span-3 sm:col-span-2 text-right font-body-md text-body-md text-on-surface tabular-nums">100</div>
+<div class="col-span-2 sm:col-span-2 text-right font-body-md text-body-md text-on-surface-variant tabular-nums">₹5.40</div>
+<div class="col-span-2 sm:col-span-2 text-right font-body-md text-body-md text-primary font-semibold tabular-nums">₹540.00</div>
+</div>
+<!-- Slab Row 3 -->
+<div class="grid grid-cols-12 px-space-md py-2.5 items-center hover:bg-surface-container-low/50 transition-colors">
+<div class="col-span-5 sm:col-span-6 flex flex-col">
+<span class="font-body-md text-body-md text-primary font-medium">Slab 3: 201 to 340 units</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">High usage increment (140 units)</span>
+</div>
+<div class="col-span-3 sm:col-span-2 text-right font-body-md text-body-md text-on-surface tabular-nums">140</div>
+<div class="col-span-2 sm:col-span-2 text-right font-body-md text-body-md text-on-surface-variant tabular-nums">₹7.20</div>
+<div class="col-span-2 sm:col-span-2 text-right font-body-md text-body-md text-primary font-semibold tabular-nums">₹1,008.00</div>
+</div>
+<!-- Subtotal Energy Charges -->
+<div class="grid grid-cols-12 px-space-md py-2.5 bg-surface-container-low items-center">
+<div class="col-span-8 sm:col-span-10 font-label-md text-label-md text-primary font-bold">
+            Total Energy Charges (340 kWh)
+          </div>
+<div class="col-span-4 sm:col-span-2 text-right font-title-lg text-title-lg text-primary font-bold tabular-nums">
+            ₹1,928.00
+          </div>
+</div>
+<!-- Additional Utility Levies -->
+<div class="p-space-md space-y-2 bg-surface-container-lowest">
+<div class="flex items-center justify-between text-body-md">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="">Fixed Demand Charges (Sanctioned Load 4.5 kW)</span>
+</div>
+<span class="font-body-md text-body-md text-primary font-medium tabular-nums">₹145.00</span>
+</div>
+<div class="flex items-center justify-between text-body-md">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="">Fuel Adjustment Charge (FAC) @ ₹0.33/kWh</span>
+</div>
+<span class="font-body-md text-body-md text-primary font-medium tabular-nums">₹112.50</span>
+</div>
+<div class="flex items-center justify-between text-body-md">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="">State Electricity Duty &amp; Taxes (16.0%)</span>
+</div>
+<span class="font-body-md text-body-md text-primary font-medium tabular-nums">₹349.50</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Summary Total Box & Payment Matrix -->
+<div class="p-space-md pt-0">
+<div class="bg-primary text-on-primary rounded-xl p-space-md shadow-lg flex flex-col md:flex-row gap-space-lg items-center justify-between">
+<!-- Left Rupee Payable Block -->
+<div class="w-full md:w-3/5 flex flex-col space-y-space-sm">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 bg-secondary text-on-secondary rounded text-label-sm font-semibold tracking-wider uppercase">Final Settlement</span>
+<span class="text-primary-fixed-dim text-body-sm">Billing Cycle: April 2024</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-surface-container-highest uppercase">Net Current Amount Payable</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-display-lg-mobile text-display-lg-mobile sm:font-display-lg sm:text-display-lg text-surface-bright font-bold tracking-tight tabular-nums">₹2,535.00</span>
+<span class="font-body-sm text-body-sm text-primary-fixed-dim">Inclusive of all levies</span>
+</div>
+</div>
+<!-- Incentive & Late Fee Provisions -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-xs pt-space-xs">
+<div class="bg-surface-container-lowest/10 p-space-xs rounded-lg flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-tertiary-fixed font-bold">Prompt Payment (-1.5%)</span>
+<span class="font-label-sm text-[11px] text-surface-container-highest">Paid before 22 Apr</span>
+</div>
+<span class="font-label-md text-label-md text-tertiary-fixed font-bold tabular-nums">-₹38.00</span>
+</div>
+<div class="bg-surface-container-lowest/10 p-space-xs rounded-lg flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary-container font-semibold">After Due Date (28 Apr)</span>
+<span class="font-label-sm text-[11px] text-surface-container-highest">Includes Late Surcharge</span>
+</div>
+<span class="font-label-md text-label-md text-surface-bright font-bold tabular-nums">₹2,610.00</span>
+</div>
+</div>
+</div>
+<!-- Right UPI / Bharat BillPay QR Scanner Block -->
+<div class="w-full md:w-2/5 flex flex-col items-center bg-surface-container-lowest text-on-surface p-space-md rounded-xl shadow-inner text-center">
+<div class="flex items-center gap-1.5 mb-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">qr_code_scanner</span>
+<span class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider">Bharat BillPay / UPI</span>
+</div>
+<!-- Dynamic Vector QR Code for Instant Scanner Delight -->
+<div class="p-2.5 bg-surface-container-lowest rounded-lg shadow-sm border border-surface-container">
+<svg class="w-28 h-28 text-primary" fill="currentColor" viewBox="0 0 100 100">
+<!-- Position Marker Top Left -->
+<rect fill="currentColor" height="26" rx="2" width="26" x="5" y="5"></rect>
+<rect fill="#FFFFFF" height="18" rx="1" width="18" x="9" y="9"></rect>
+<rect fill="currentColor" height="10" rx="1" width="10" x="13" y="13"></rect>
+<!-- Position Marker Top Right -->
+<rect fill="currentColor" height="26" rx="2" width="26" x="69" y="5"></rect>
+<rect fill="#FFFFFF" height="18" rx="1" width="18" x="73" y="9"></rect>
+<rect fill="currentColor" height="10" rx="1" width="10" x="77" y="13"></rect>
+<!-- Position Marker Bottom Left -->
+<rect fill="currentColor" height="26" rx="2" width="26" x="5" y="69"></rect>
+<rect fill="#FFFFFF" height="18" rx="1" width="18" x="9" y="73"></rect>
+<rect fill="currentColor" height="10" rx="1" width="10" x="13" y="77"></rect>
+<!-- QR Alignment Matrix Pixels -->
+<rect height="6" width="6" x="36" y="8"></rect>
+<rect height="6" width="8" x="46" y="8"></rect>
+<rect height="6" width="12" x="36" y="18"></rect>
+<rect height="8" width="8" x="52" y="18"></rect>
+<rect height="8" width="6" x="8" y="36"></rect>
+<rect height="6" width="8" x="18" y="36"></rect>
+<rect height="8" width="8" x="8" y="48"></rect>
+<rect height="8" width="6" x="20" y="48"></rect>
+<rect fill="#006398" height="10" width="10" x="36" y="36"></rect>
+<rect height="6" width="6" x="50" y="36"></rect>
+<rect height="12" width="8" x="60" y="36"></rect>
+<rect height="6" width="16" x="74" y="36"></rect>
+<rect height="8" width="8" x="36" y="50"></rect>
+<rect height="14" width="8" x="48" y="46"></rect>
+<rect fill="#006398" height="6" width="6" x="60" y="52"></rect>
+<rect height="8" width="12" x="70" y="48"></rect>
+<rect height="8" width="8" x="36" y="68"></rect>
+<rect height="8" width="8" x="48" y="64"></rect>
+<rect height="6" width="12" x="60" y="68"></rect>
+<rect height="12" width="8" x="76" y="64"></rect>
+<rect height="8" width="18" x="36" y="80"></rect>
+<rect height="12" width="6" x="58" y="78"></rect>
+<rect height="8" width="12" x="68" y="80"></rect>
+<rect height="8" width="8" x="84" y="80"></rect>
+</svg>
+</div>
+<span class="font-label-sm text-[11px] text-on-surface-variant mt-2 font-medium">Scan with GPay, PhonePe, BHIM</span>
+<span class="font-label-sm text-[10px] text-secondary font-bold">VPA: msedcl.billpay@sbi</span>
+</div>
+</div>
+</div>
+<!-- Official Footer & Statutory Instructions -->
+<div class="p-space-md bg-surface-container-low flex flex-col sm:flex-row items-center justify-between gap-space-sm font-label-sm text-label-sm text-on-surface-variant">
+<div class="flex items-center gap-space-sm text-center sm:text-left">
+<span class="material-symbols-outlined text-[20px] text-secondary">info</span>
+<span class="">Electricity duty is levied under Maharashtra Electricity Duty Act. Keep this invoice for subsidy claims.</span>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-bold text-primary">Certified Digitally Signed</span>
+</div>
+</div>
+</div>
+<!-- Interactive Quick Reference Card (Historical Trend Micro-visual) -->
+<div class="w-full bg-surface-container-lowest p-space-md rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">insights</span>
+<span class="font-title-lg text-title-lg text-primary font-bold">Past 4 Months Consumption Trajectory</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">LT-1 Category Avg: 280 kWh</span>
+</div>
+<!-- Simple Responsive Inline Vector Bar Graph -->
+<div class="grid grid-cols-4 gap-space-sm pt-2">
+<!-- Jan -->
+<div class="flex flex-col items-center gap-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Jan '24</span>
+<div class="w-full bg-surface-container rounded-t-md h-24 flex items-end p-1">
+<div class="w-full bg-surface-container-high rounded-sm h-[65%] transition-all"></div>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">220 U</span>
+</div>
+<!-- Feb -->
+<div class="flex flex-col items-center gap-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Feb '24</span>
+<div class="w-full bg-surface-container rounded-t-md h-24 flex items-end p-1">
+<div class="w-full bg-surface-container-high rounded-sm h-[75%] transition-all"></div>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">255 U</span>
+</div>
+<!-- Mar -->
+<div class="flex flex-col items-center gap-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Mar '24</span>
+<div class="w-full bg-surface-container rounded-t-md h-24 flex items-end p-1">
+<div class="w-full bg-secondary-fixed rounded-sm h-[88%] transition-all"></div>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">300 U</span>
+</div>
+<!-- Apr (Current) -->
+<div class="flex flex-col items-center gap-1.5">
+<span class="font-label-sm text-label-sm text-secondary font-bold">Apr '24</span>
+<div class="w-full bg-surface-container rounded-t-md h-24 flex items-end p-1">
+<div class="w-full bg-secondary rounded-sm h-[100%] shadow-sm transition-all"></div>
+</div>
+<span class="font-label-md text-label-md text-secondary font-bold">340 U</span>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function triggerToast(message) {
+    const toast = document.getElementById('interactive-toast');
+    const msgElem = document.getElementById('toast-message');
+    if (toast && msgElem) {
+      msgElem.innerText = message;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 4000);
+    }
+  }
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-1px_12px_rgba(0,0,0,0.04)]" data-active-classes="text-secondary font-bold"><div class="h-16 px-space-xs flex items-center justify-around"><a class="flex flex-col items-center justify-center flex-1 h-14 min-w-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="admin-dashboard" href="#"><span class="material-symbols-outlined text-[22px]">dashboard</span><span class="font-label-sm text-[11px] leading-tight mt-0.5">Dashboard</span></a><a aria-current="page" class="flex flex-col items-center justify-center flex-1 h-14 min-w-[44px] transition-colors text-secondary font-bold" data-path="bills-invoice" href="#"><span class="material-symbols-outlined text-[22px]">receipt_long</span><span class="font-label-sm text-[11px] leading-tight mt-0.5">Bills</span></a><a class="flex flex-col items-center justify-center flex-1 h-14 min-w-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="meter-readings" href="#"><span class="material-symbols-outlined text-[22px]">speed</span><span class="font-label-sm text-[11px] leading-tight mt-0.5">Readings</span></a><a class="flex flex-col items-center justify-center flex-1 h-14 min-w-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="customers" href="#"><span class="material-symbols-outlined text-[22px]">group</span><span class="font-label-sm text-[11px] leading-tight mt-0.5">Customers</span></a><button aria-label="Toggle Menu" class="flex flex-col items-center justify-center flex-1 h-14 min-w-[44px] text-on-surface-variant hover:text-on-surface transition-colors" onclick="document.getElementById('side-drawer').classList.remove('-translate-x-full');document.getElementById('drawer-overlay').classList.remove('opacity-0','pointer-events-none');" type="button"><span class="material-symbols-outlined text-[22px]">menu_open</span><span class="font-label-sm text-[11px] leading-tight mt-0.5">Menu</span></button></div></nav>
+
+<script>
+  (function initDashboardNavigation() {
+    const routes = {
+      'admin-dashboard': '../admin_dashboard/code.html',
+      'bills-invoice': '../bill_generation_invoice/code.html',
+      'meter-readings': '../meter_readings/code.html',
+      'customers': '../customer_management/code.html',
+      'meters': '../meter_management/code.html',
+      'payments': '../payments_management/code.html',
+      'dashboard': '../admin_dashboard/code.html',
+      'bills': '../bill_generation_invoice/code.html',
+      'readings': '../meter_readings/code.html',
+      'users': '../customer_management/code.html',
+      'consumers': '../customer_management/code.html',
+      'profile': '../customer_portal_consumption/code.html'
+    };
+
+    document.querySelectorAll('[data-path]').forEach((element) => {
+      const path = element.dataset.path;
+      const target = routes[path];
+      if (!target) return;
+
+      element.addEventListener('click', (event) => {
+        event.preventDefault();
+        window.location.href = target;
+      });
+    });
+
+    document.querySelectorAll('a[href="#"]').forEach((element) => {
+      const target = routes[element.dataset.path || ''];
+      if (!target) return;
+      element.addEventListener('click', (event) => {
+        event.preventDefault();
+        window.location.href = target;
+      });
+    });
+  })();
+</script>
+</body></html>

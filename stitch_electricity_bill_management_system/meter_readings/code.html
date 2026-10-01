@@ -1,0 +1,615 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_tab" name="shell-type"><title>Electricity Bill Management System</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{width:100%;margin:0;padding:0;min-height:100%;}body{overscroll-behavior-y:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "tertiary-container": "#002d1d", "on-secondary-container": "#00476e", "error-container": "#ffdad6", "on-tertiary-fixed": "#002114", "inverse-on-surface": "#eaf1ff", "surface-container-high": "#dce9ff", "primary": "#001229", "on-secondary": "#ffffff", "primary-fixed-dim": "#b2c8ed", "surface": "#f8f9ff", "error": "#ba1a1a", "on-error-container": "#93000a", "on-surface-variant": "#44474d", "outline-variant": "#c4c6ce", "surface-container-lowest": "#ffffff", "tertiary-fixed-dim": "#68dba9", "on-primary-fixed-variant": "#324866", "on-tertiary-fixed-variant": "#005137", "surface-dim": "#cbdbf5", "surface-container-highest": "#d3e4fe", "secondary-container": "#5bb8fe", "on-tertiary-container": "#1fa072", "tertiary": "#00160c", "on-primary": "#ffffff", "outline": "#74777e", "on-primary-container": "#798fb1", "surface-container": "#e5eeff", "surface-bright": "#f8f9ff", "on-tertiary": "#ffffff", "secondary": "#006398", "tertiary-fixed": "#85f8c4", "surface-variant": "#d3e4fe", "on-error": "#ffffff", "on-surface": "#0b1c30", "secondary-fixed": "#cce5ff", "on-primary-fixed": "#021c39", "surface-container-low": "#eff4ff", "inverse-surface": "#213145", "secondary-fixed-dim": "#93ccff", "on-background": "#0b1c30", "surface-tint": "#4a5f7f", "inverse-primary": "#b2c8ed", "on-secondary-fixed-variant": "#004b73", "background": "#f8f9ff", "primary-fixed": "#d4e3ff", "on-secondary-fixed": "#001d31", "primary-container": "#0f2744" }, borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, spacing: { "space-sm": "0.5rem", "gutter": "1rem", "space-md": "1rem", "space-xs": "0.25rem", "margin-desktop": "2rem", "space-lg": "1.5rem", "gutter-desktop": "1.5rem", "space-xl": "2rem", "margin": "1rem" }, fontFamily: { "body-md": ["Hanken Grotesk"], "label-md": ["Hanken Grotesk"], "display-lg": ["Manrope"], "headline-lg": ["Manrope"], "metric-num-lg": ["Hanken Grotesk"], "title-lg": ["Manrope"], "display-lg-mobile": ["Manrope"], "headline-md": ["Manrope"], "body-sm": ["Hanken Grotesk"], "metric-num-md": ["Hanken Grotesk"], "label-sm": ["Hanken Grotesk"], "headline-xl": ["Manrope"], "body-lg": ["Hanken Grotesk"] }, fontSize: { "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "label-md": ["13px", { "lineHeight": "18px", "fontWeight": "500" }], "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "700" }], "headline-lg": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "metric-num-lg": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "title-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }], "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-md": ["18px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }], "metric-num-md": ["20px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface flex flex-col min-h-screen relative antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-gutter flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><button aria-label="Open Navigation Drawer" class="w-11 h-11 flex items-center justify-center text-on-surface hover:text-secondary rounded-lg active:scale-95 transition-all" onclick="document.getElementById('side-drawer').classList.remove('-translate-x-full');document.getElementById('drawer-overlay').classList.remove('opacity-0','pointer-events-none');" type="button"><span class="material-symbols-outlined text-[24px]">menu</span></button><img alt="Electricity Bill Management System Logo" class="h-8 w-auto object-contain shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1UHrVYwUFG-_MWAjb045klccl6AzLpsGZFlc_CoHfj2ifHKTAnqw631GbVUW3xOYGvMCC22BHyyYk1hpnr38SUFvj49cMxaRZeQSaMF6y-R67YQnAGADSXOIYgEz3x2PGbxefu7Xp2Vx_tm-34rhsgNnjaDqCu4uRys6dqhbcFG4snf246eQ9GuspmOTG40KClG2g1jUbY-Ke-Si6YaHtwmK84b94btCYczuKthk5UjWdg0k9nqb6up3ZTV"><div class="flex flex-col min-w-0"><span class="font-title-lg text-title-lg text-primary truncate leading-tight font-bold">Electricity Bill</span><span class="font-label-sm text-label-sm text-secondary truncate font-semibold uppercase tracking-wider">Management System</span></div></div><div class="flex items-center gap-space-xs shrink-0"><span class="hidden xs:inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm tracking-normal uppercase">Admin</span><button aria-label="Notifications" class="relative w-11 h-11 flex items-center justify-center text-on-surface-variant hover:text-on-surface active:scale-95 transition-all" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2 right-2 flex items-center justify-center min-w-[16px] h-4 px-1 rounded-full bg-error text-on-error font-label-sm text-[10px] font-bold leading-none">3</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><div class="fixed inset-0 z-50 bg-primary/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300" id="drawer-overlay" onclick="document.getElementById('side-drawer').classList.add('-translate-x-full');this.classList.add('opacity-0','pointer-events-none');"></div><aside class="fixed top-0 left-0 bottom-0 z-50 w-72 max-w-[80vw] bg-surface-container-lowest shadow-[0_4px_24px_rgba(0,18,41,0.12)] -translate-x-full transition-transform duration-300 flex flex-col pt-safe pb-safe" id="side-drawer"><div class="h-16 px-gutter flex items-center justify-between bg-surface-container-low"><div class="flex items-center gap-space-sm"><img alt="Electricity Bill Management System Logo" class="h-7 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UHrVYwUFG-_MWAjb045klccl6AzLpsGZFlc_CoHfj2ifHKTAnqw631GbVUW3xOYGvMCC22BHyyYk1hpnr38SUFvj49cMxaRZeQSaMF6y-R67YQnAGADSXOIYgEz3x2PGbxefu7Xp2Vx_tm-34rhsgNnjaDqCu4uRys6dqhbcFG4snf246eQ9GuspmOTG40KClG2g1jUbY-Ke-Si6YaHtwmK84b94btCYczuKthk5UjWdg0k9nqb6up3ZTV"><span class="font-title-lg text-title-lg text-primary">Electricity Bill Management System</span></div><button aria-label="Close Drawer" class="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:text-on-surface" onclick="document.getElementById('side-drawer').classList.add('-translate-x-full');document.getElementById('drawer-overlay').classList.add('opacity-0','pointer-events-none');" type="button"><span class="material-symbols-outlined text-[22px]">close</span></button></div><div class="px-gutter py-space-sm bg-surface-container-low"><div class="flex items-center justify-between p-space-xs bg-surface rounded-lg"><span class="font-label-sm text-label-sm text-on-surface-variant px-space-xs">Active Role:</span><button class="flex items-center gap-1 px-2.5 py-1 rounded bg-primary text-on-primary font-label-sm text-label-sm" type="button"><span class="material-symbols-outlined text-[14px]">swap_horiz</span>Admin</button></div></div><nav class="flex-1 overflow-y-auto px-space-sm py-space-md space-y-1" data-active-classes="bg-secondary-fixed text-on-secondary-fixed font-semibold"><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="login-switch-role" href="#"><span class="material-symbols-outlined text-[22px]">manage_accounts</span><span class="font-label-md text-label-md">Login / Switch Role</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="admin-dashboard" href="#"><span class="material-symbols-outlined text-[22px]">dashboard</span><span class="font-label-md text-label-md">Admin Dashboard</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="customers" href="#"><span class="material-symbols-outlined text-[22px]">group</span><span class="font-label-md text-label-md">Customers</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="meters" href="#"><span class="material-symbols-outlined text-[22px]">electric_meter</span><span class="font-label-md text-label-md">Meters</span></a><a aria-current="page" class="flex items-center gap-space-md px-space-md h-12 rounded-lg transition-all bg-secondary-fixed text-on-secondary-fixed font-semibold" data-path="meter-readings" href="#"><span class="material-symbols-outlined text-[22px]">speed</span><span class="font-label-md text-label-md">Meter Readings</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="bills-invoice" href="#"><span class="material-symbols-outlined text-[22px]">receipt_long</span><span class="font-label-md text-label-md">Bills &amp; Invoice</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="payments" href="#"><span class="material-symbols-outlined text-[22px]">payments</span><span class="font-label-md text-label-md">Payments</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="tariff-slabs" href="#"><span class="material-symbols-outlined text-[22px]">stacked_bar_chart</span><span class="font-label-md text-label-md">Tariff Slabs</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="reports" href="#"><span class="material-symbols-outlined text-[22px]">analytics</span><span class="font-label-md text-label-md">Reports</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="customer-portal" href="#"><span class="material-symbols-outlined text-[22px]">account_circle</span><span class="font-label-md text-label-md">Customer Portal</span></a></nav><div class="p-gutter bg-surface-container-low flex items-center justify-between"><div class="flex items-center gap-space-xs"><div class="w-2.5 h-2.5 rounded-full bg-tertiary-fixed-dim"></div><span class="font-label-sm text-label-sm text-on-surface-variant">Grid Telemetry Online</span></div><span class="font-label-sm text-label-sm text-secondary font-bold">v3.4.1</span></div></aside><main class="flex-1 flex flex-col relative w-full pt-16 pb-20 bg-surface min-h-[calc(100vh-5rem)]"><div class="flex flex-col w-full">
+<div class="px-gutter pt-space-md pb-space-lg flex flex-col gap-space-lg">
+<!-- Substation Cycle Header Card -->
+<div class="relative overflow-hidden rounded-xl bg-primary-container text-on-primary p-space-md shadow-md">
+<div class="relative z-10 flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+            ACTIVE CYCLE
+          </span>
+<div class="flex items-center gap-1 text-on-primary-container font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">bolt</span>
+<span class="">Grid Feed #09</span>
+</div>
+</div>
+<div class="flex flex-col mt-space-xs">
+<span class="font-headline-lg text-headline-lg font-bold text-on-primary tracking-tight">Billing Cycle: April 2024</span>
+<span class="font-body-sm text-body-sm text-on-primary-container">Substation Feed #09 • Feeder Division South-Central • Zone 4</span>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="flex -space-x-1.5 overflow-hidden">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-secondary font-label-sm text-[10px] text-on-secondary font-bold">SP</span>
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-[10px] font-bold">AK</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-primary-container">Field Squad: Alpha-2 Active</span>
+</div>
+<span class="font-label-sm text-label-sm font-semibold text-secondary-fixed">Target: 98.4% by 20 Apr</span>
+</div>
+</div>
+<!-- Subtle ambient technical watermark -->
+<div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-secondary/10 pointer-events-none blur-xl"></div>
+<div class="absolute right-3 top-3 opacity-10 text-on-primary">
+<span class="material-symbols-outlined text-[72px]">speed</span>
+</div>
+</div>
+<!-- Quick Telemetry Mini-Strip -->
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="rounded-xl bg-surface-container p-space-md flex flex-col justify-between shadow-sm">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-sm text-label-sm uppercase">Total Tracked</span>
+<span class="material-symbols-outlined text-[18px] text-secondary">electric_meter</span>
+</div>
+<div class="mt-space-xs flex items-baseline gap-1">
+<span class="font-metric-num-lg text-metric-num-lg font-bold text-on-surface">1,196</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">meters</span>
+</div>
+<div class="mt-space-xs w-full bg-surface-container-high rounded-full h-1.5 overflow-hidden">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 96.5%"></div>
+</div>
+</div>
+<div class="rounded-xl bg-surface-container p-space-md flex flex-col justify-between shadow-sm">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-sm text-label-sm uppercase">Audit Health</span>
+<span class="material-symbols-outlined text-[18px] text-on-tertiary-container">verified</span>
+</div>
+<div class="mt-space-xs flex items-baseline gap-1">
+<span class="font-metric-num-lg text-metric-num-lg font-bold text-on-tertiary-container">99.2%</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">pass</span>
+</div>
+<span class="mt-space-xs font-label-sm text-[11px] text-on-surface-variant truncate">1 discrepancy flagged</span>
+</div>
+</div>
+<!-- Visual Field Work Context Image -->
+<div class="rounded-xl overflow-hidden shadow-sm relative h-28 bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Close up photograph of a smart digital electrical meter installed on a neat institutional terminal board with blue LED digital readouts and safety seal stickers, ambient soft morning sunlight reflecting on the glass casing, deep navy and cyan hues reflecting power grid precision" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoTaPoUbzWvazrM2T1rEokCxrfH9kZM06YQctA0FDVwsz2wD0tMIOxTd_ZhpBxkGvaPUfFSV5nrcSK5DKZfLFO9WEpo6XTSEQRysWMFae6G9bTVmwfnJFEx02oYkp7n2zG47EyQku-PbTkLaByxsnNXukR-UgPXKP7sY4mrMf9zneK5rLTmpI7vA7l0w9IvN_sTki0TFcaTdkrb1SBqgH5a0Y_fBFD_uuAEADGfveoidGmi99BRPU9vA">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/30 to-transparent flex items-end p-space-md">
+<div class="flex items-center justify-between w-full text-on-primary">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-secondary-fixed">pin_drop</span>
+<span class="font-label-sm text-label-sm">Sector 12 • Sub-loop B</span>
+</div>
+<span class="font-label-sm text-label-sm bg-surface-container-lowest/20 backdrop-blur-md px-2 py-0.5 rounded text-on-primary">Telemetry Sync OK</span>
+</div>
+</div>
+</div>
+<!-- Interactive Reading Entry Form Card -->
+<section class="rounded-xl bg-surface-container-lowest p-space-md shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface">Record Meter Reading</h2>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Field manual entry &amp; instant tariff draft</span>
+</div>
+</div>
+<span class="px-2 py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm">Form #MTR-04</span>
+</div>
+<form class="flex flex-col gap-space-md" id="reading-form" onsubmit="event.preventDefault();">
+<!-- Consumer Selector -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md font-semibold text-on-surface" for="consumer-select">Select Consumer &amp; Meter</label>
+<div class="relative">
+<select class="w-full h-11 px-space-md pr-10 rounded-lg bg-surface-container text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none appearance-none cursor-pointer shadow-sm" id="consumer-select">
+<option selected="" value="arun">Arun Kumar (MTR-88210 - Domestic LT-1)</option>
+<option value="priya">Priya Sharma (MTR-77319 - Commercial HT-2)</option>
+<option value="karthik">Karthik Raman (MTR-66102 - Domestic LT-1)</option>
+<option value="divya">Divya Nair (MTR-55490 - Solar Domestic Prosumer)</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-3 top-3 text-[20px] text-on-surface-variant">expand_more</span>
+</div>
+<span class="font-body-sm text-[11px] text-on-surface-variant">Connected load: 4.5 kW • Single Phase • Sanctioned</span>
+</div>
+<!-- Meter Reading Metrics Grid -->
+<div class="grid grid-cols-1 gap-space-sm sm:grid-cols-2">
+<!-- Previous Reading (Disabled) -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface-variant flex items-center justify-between">
+<span class="">Previous Reading</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">14 Mar 2024</span>
+</label>
+<div class="relative flex items-center">
+<input class="w-full h-11 px-space-md rounded-lg bg-surface-container-high text-on-surface font-metric-num-md text-metric-num-md font-bold cursor-not-allowed opacity-90 select-none" disabled="" id="prev-reading-display" type="text" value="14,480 kWh">
+<span class="material-symbols-outlined absolute right-3 text-[18px] text-on-surface-variant">lock</span>
+</div>
+</div>
+<!-- Current Reading Input -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md font-semibold text-on-surface flex items-center justify-between" for="current-reading-input">
+<span class="">Current Reading</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">kWh units</span>
+</label>
+<div class="relative flex items-center">
+<input class="w-full h-11 px-space-md pr-12 rounded-lg bg-surface-container-low text-on-surface font-metric-num-md text-metric-num-md font-bold focus:bg-surface-container-lowest focus:outline-none focus:ring-0 shadow-sm transition-all" id="current-reading-input" placeholder="Enter numeric reading" type="number" value="14820">
+<span class="material-symbols-outlined absolute right-3 text-[20px] text-secondary">dialpad</span>
+</div>
+</div>
+</div>
+<!-- Dynamic Calculation Callout (Alive & Interactive) -->
+<div class="rounded-xl bg-surface-container p-space-md flex flex-col gap-space-xs transition-colors" id="calc-callout">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+<span class="font-label-md text-label-md font-bold">Dynamic Consumption</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold" id="calc-badge">Valid Reading</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mt-1">
+<div class="flex items-baseline gap-2">
+<span class="font-body-md text-body-md text-on-surface">⚡ Units Consumed =</span>
+<span class="font-metric-num-lg text-metric-num-lg font-bold text-on-surface" id="consumed-units">340</span>
+<span class="font-headline-md text-headline-md font-semibold text-on-surface-variant">kWh</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant" id="calc-formula">(Current 14,820 − Previous 14,480)</span>
+</div>
+</div>
+<!-- Real-time Validation Warning Badge Area -->
+<div class="rounded-lg bg-surface-container-low p-space-sm flex items-start gap-space-sm transition-all" id="validation-box">
+<span class="material-symbols-outlined text-[20px] text-on-tertiary-container shrink-0 mt-0.5" id="validation-icon">check_circle</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface" id="validation-title">Validation OK</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant" id="validation-desc">Reading exceeds previous cycle reading by 340 kWh. No roll-over detected.</span>
+</div>
+</div>
+<!-- Date & Reader Metadata -->
+<div class="grid grid-cols-1 gap-space-sm sm:grid-cols-2">
+<!-- Reading Date -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md font-semibold text-on-surface" for="reading-date">Reading Date</label>
+<div class="relative flex items-center">
+<input class="w-full h-11 px-space-md pr-10 rounded-lg bg-surface-container text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none appearance-none shadow-sm cursor-pointer" id="reading-date" type="date" value="2024-04-14">
+<span class="material-symbols-outlined pointer-events-none absolute right-3 text-[18px] text-on-surface-variant">calendar_today</span>
+</div>
+</div>
+<!-- Meter Reader Officer -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md font-semibold text-on-surface">Assigned Field Officer</label>
+<div class="h-11 px-space-md rounded-lg bg-surface-container flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-2 truncate">
+<span class="material-symbols-outlined text-[18px] text-secondary">badge</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">S. Patil (Staff ID #8841)</span>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-sm text-[10px] uppercase font-bold">Biometric OK</span>
+</div>
+</div>
+</div>
+<!-- Interactive Error State Trigger Demo Button -->
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-secondary">tune</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Simulate field discrepancy check:</span>
+</div>
+<button class="px-2.5 py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm hover:bg-secondary-fixed transition-colors" id="toggle-error-sim" type="button">
+            Test Negative Reading
+          </button>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col sm:flex-row items-center gap-space-sm pt-space-xs">
+<button class="w-full sm:flex-1 h-12 rounded-lg bg-primary text-on-primary font-title-lg text-title-lg font-semibold flex items-center justify-center gap-2 active:scale-[0.98] transition-all shadow-md hover:bg-primary-container" id="submit-btn" type="button">
+<span class="material-symbols-outlined text-[20px]">assignment_turned_in</span>
+<span class="">Submit Reading &amp; Generate Bill Draft</span>
+</button>
+<button class="w-full sm:w-auto px-space-lg h-12 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md font-semibold flex items-center justify-center gap-1.5 active:scale-[0.98] transition-all hover:bg-surface-container-high" id="reset-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+<span class="">Reset</span>
+</button>
+</div>
+</form>
+</section>
+<!-- Reading Audit Log & History Section -->
+<section class="flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-space-xs">
+<div>
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface">Reading Audit Log &amp; History</h2>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Substation Feed #09 cycle records with dual verification</span>
+</div>
+<button class="self-start sm:self-auto flex items-center gap-1.5 text-secondary font-label-md text-label-md font-semibold py-1" type="button">
+<span class="material-symbols-outlined text-[18px]">file_download</span>
+          Export Cycle Log
+        </button>
+</div>
+<!-- Filter Controls Strip -->
+<div class="flex items-center gap-space-xs overflow-x-auto pb-1 -mx-gutter px-gutter scrollbar-none">
+<button class="filter-chip px-3 py-1.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-semibold shrink-0 shadow-sm transition-all" data-filter="all" type="button">
+          All Meters
+        </button>
+<button class="filter-chip px-3 py-1.5 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm shrink-0 hover:bg-surface-container-high transition-all" data-filter="pending" type="button">
+          Pending Reading (42)
+        </button>
+<button class="filter-chip px-3 py-1.5 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm shrink-0 hover:bg-surface-container-high transition-all" data-filter="completed" type="button">
+          Completed (1,154)
+        </button>
+<button class="filter-chip px-3 py-1.5 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm shrink-0 hover:bg-surface-container-high transition-all" data-filter="flagged" type="button">
+          Discrepancies (1)
+        </button>
+</div>
+<!-- Audit Log Cards Feed -->
+<div class="flex flex-col gap-space-sm" id="audit-list">
+<!-- Record 1 -->
+<article class="audit-item rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-space-sm hover:shadow-md transition-shadow" data-category="completed">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-md text-label-md font-bold text-primary px-2 py-0.5 rounded bg-surface-container">MTR-88210</span>
+<span class="font-title-lg text-title-lg text-on-surface font-semibold">Arun Kumar</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">check</span>
+              Verified
+            </span>
+</div>
+<div class="rounded-lg bg-surface-container-low p-space-sm grid grid-cols-2 sm:grid-cols-4 gap-space-xs text-left">
+<div>
+<span class="font-body-sm text-[11px] text-on-surface-variant block">Meter Sequence</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">14,480 → 14,820</span>
+</div>
+<div>
+<span class="font-body-sm text-[11px] text-on-surface-variant block">Consumed</span>
+<span class="font-metric-num-md text-metric-num-md font-bold text-secondary">340 kWh</span>
+</div>
+<div>
+<span class="font-body-sm text-[11px] text-on-surface-variant block">Recorded</span>
+<span class="font-label-md text-label-md text-on-surface">14 Apr 2024</span>
+</div>
+<div>
+<span class="font-body-sm text-[11px] text-on-surface-variant block">Reader Agent</span>
+<span class="font-label-md text-label-md text-on-surface-variant">S. Patil (#8841)</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant pt-space-xs">
+<span class="font-body-sm text-[11px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-on-tertiary-container">done_all</span>
+              Auto-billed • Invoice Draft #INV-9921 generated
+            </span>
+<button class="text-secondary hover:text-on-surface font-label-sm text-label-sm font-semibold flex items-center gap-0.5" type="button">
+<span class="">Inspect</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</button>
+</div>
+</article>
+<!-- Record 2 -->
+<article class="audit-item rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-space-sm hover:shadow-md transition-shadow" data-category="completed">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-md text-label-md font-bold text-primary px-2 py-0.5 rounded bg-surface-container">MTR-77319</span>
+<span class="font-title-lg text-title-lg text-on-surface font-semibold">Priya Sharma</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">check</span>
+              Verified
+            </span>
+</div>
+<div class="rounded-lg bg-surface-container-low p-space-sm grid grid-cols-2 sm:grid-cols-4 gap-space-xs text-left">
+<div>
+<span class="font-body-sm text-[11px] text-on-surface-variant block">Meter Sequence</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">37,970 → 38,450</span>
+</div>
+<div>
+<span class="font-body-sm text-[11px] text-on-surface-variant block">Consumed</span>
+<span class="font-metric-num-md text-metric-num-md font-bold text-secondary">480 kWh</span>
+</div>
+<div>
+<span class="font-body-sm text-[11px] text-on-surface-variant block">Recorded</span>
+<span class="font-label-md text-label-md text-on-surface">13 Apr 2024</span>
+</div>
+<div>
+<span class="font-body-sm text-[11px] text-on-surface-variant block">Reader Agent</span>
+<span class="font-label-md text-label-md text-on-surface-variant">S. Patil (#8841)</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant pt-space-xs">
+<span class="font-body-sm text-[11px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-on-tertiary-container">done_all</span>
+              Commercial Tariff Applied • Demand factor regular
+            </span>
+<button class="text-secondary hover:text-on-surface font-label-sm text-label-sm font-semibold flex items-center gap-0.5" type="button">
+<span class="">Inspect</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</button>
+</div>
+</article>
+<!-- Record 3 (Discrepancy) -->
+<article class="audit-item rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-space-sm hover:shadow-md transition-shadow" data-category="flagged">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-md text-label-md font-bold text-primary px-2 py-0.5 rounded bg-surface-container">MTR-66102</span>
+<span class="font-title-lg text-title-lg text-on-surface font-semibold">Karthik Raman</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+              Discrepancy Flag
+            </span>
+</div>
+<div class="rounded-lg bg-surface-container-low p-space-sm grid grid-cols-2 sm:grid-cols-4 gap-space-xs text-left">
+<div>
+<span class="font-body-sm text-[11px] text-on-surface-variant block">Meter Sequence</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">20,915 → 21,110</span>
+</div>
+<div>
+<span class="font-body-sm text-[11px] text-on-surface-variant block">Consumed</span>
+<span class="font-metric-num-md text-metric-num-md font-bold text-error">195 kWh</span>
+</div>
+<div>
+<span class="font-body-sm text-[11px] text-on-surface-variant block">Recorded</span>
+<span class="font-label-md text-label-md text-on-surface">12 Apr 2024</span>
+</div>
+<div>
+<span class="font-body-sm text-[11px] text-on-surface-variant block">Reader Agent</span>
+<span class="font-label-md text-label-md text-on-surface-variant">R. Deshmukh (#9102)</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant pt-space-xs">
+<span class="font-body-sm text-[11px] text-error flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">info</span>
+              Usage dropped 65% vs 3-month baseline • Requires supervisor audit
+            </span>
+<button class="px-2.5 py-1 rounded bg-primary text-on-primary font-label-sm text-label-sm font-semibold hover:bg-primary-container transition-colors" type="button">
+              Review Flag
+            </button>
+</div>
+</article>
+<!-- Record 4 (Solar Prosumer) -->
+<article class="audit-item rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-space-sm hover:shadow-md transition-shadow" data-category="completed">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-md text-label-md font-bold text-primary px-2 py-0.5 rounded bg-surface-container">MTR-55490</span>
+<span class="font-title-lg text-title-lg text-on-surface font-semibold">Divya Nair</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">solar_power</span>
+                Solar Export: 80 kWh
+              </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold">
+                Verified
+              </span>
+</div>
+</div>
+<div class="rounded-lg bg-surface-container-low p-space-sm grid grid-cols-2 sm:grid-cols-4 gap-space-xs text-left">
+<div>
+<span class="font-body-sm text-[11px] text-on-surface-variant block">Meter Sequence</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">8,300 → 8,920</span>
+</div>
+<div>
+<span class="font-body-sm text-[11px] text-on-surface-variant block">Gross Grid Draw</span>
+<span class="font-metric-num-md text-metric-num-md font-bold text-secondary">620 kWh</span>
+</div>
+<div>
+<span class="font-body-sm text-[11px] text-on-surface-variant block">Recorded</span>
+<span class="font-label-md text-label-md text-on-surface">12 Apr 2024</span>
+</div>
+<div>
+<span class="font-body-sm text-[11px] text-on-surface-variant block">Net Billed</span>
+<span class="font-metric-num-md text-metric-num-md font-bold text-on-tertiary-container">540 kWh</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant pt-space-xs">
+<span class="font-body-sm text-[11px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">wb_sunny</span>
+              Net metering credit applied • 80 kWh routed to regional micro-grid
+            </span>
+<button class="text-secondary hover:text-on-surface font-label-sm text-label-sm font-semibold flex items-center gap-0.5" type="button">
+<span class="">Inspect</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</button>
+</div>
+</article>
+</div>
+</section>
+<!-- Field Operator Quick Reference Card -->
+<div class="rounded-xl bg-surface-container p-space-md flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">help_center</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Reading Discrepancy Protocol</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">In case of physical tampering seal breach, lodge code SEC-02 immediately.</span>
+</div>
+</div>
+<button class="shrink-0 p-2 rounded-lg text-secondary hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-[22px]">contact_support</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    const prevReading = 14480;
+    const currentInput = document.getElementById('current-reading-input');
+    const consumedUnitsEl = document.getElementById('consumed-units');
+    const calcFormulaEl = document.getElementById('calc-formula');
+    const calcBadgeEl = document.getElementById('calc-badge');
+    const calcCallout = document.getElementById('calc-callout');
+    const validationBox = document.getElementById('validation-box');
+    const validationIcon = document.getElementById('validation-icon');
+    const validationTitle = document.getElementById('validation-title');
+    const validationDesc = document.getElementById('validation-desc');
+    const submitBtn = document.getElementById('submit-btn');
+    const resetBtn = document.getElementById('reset-btn');
+    const toggleSimBtn = document.getElementById('toggle-error-sim');
+
+    function updateCalculations(currentVal) {
+      const current = parseFloat(currentVal);
+      
+      if (isNaN(current)) {
+        consumedUnitsEl.textContent = '--';
+        calcFormulaEl.textContent = 'Please enter a valid numeric reading';
+        return;
+      }
+
+      const diff = current - prevReading;
+
+      if (diff >= 0) {
+        // Valid State
+        consumedUnitsEl.textContent = diff.toLocaleString();
+        consumedUnitsEl.className = "font-metric-num-lg text-metric-num-lg font-bold text-on-surface";
+        calcFormulaEl.textContent = `(Current ${current.toLocaleString()} − Previous ${prevReading.toLocaleString()})`;
+        
+        calcBadgeEl.textContent = 'Valid Reading';
+        calcBadgeEl.className = 'px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold';
+
+        calcCallout.className = 'rounded-xl bg-surface-container p-space-md flex flex-col gap-space-xs transition-colors';
+
+        validationBox.className = 'rounded-lg bg-surface-container-low p-space-sm flex items-start gap-space-sm transition-all';
+        validationIcon.textContent = 'check_circle';
+        validationIcon.className = 'material-symbols-outlined text-[20px] text-on-tertiary-container shrink-0 mt-0.5';
+        validationTitle.textContent = 'Validation OK';
+        validationTitle.className = 'font-label-md text-label-md font-bold text-on-surface';
+        validationDesc.textContent = `Reading exceeds previous reading by ${diff.toLocaleString()} kWh. Normal sequential consumption pattern.`;
+        
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+      } else {
+        // Error State (Current < Previous)
+        consumedUnitsEl.textContent = diff.toLocaleString();
+        consumedUnitsEl.className = "font-metric-num-lg text-metric-num-lg font-bold text-error";
+        calcFormulaEl.textContent = `Anomaly: Current (${current.toLocaleString()}) is LESS than Previous (${prevReading.toLocaleString()})`;
+        
+        calcBadgeEl.textContent = 'Input Anomaly';
+        calcBadgeEl.className = 'px-2 py-0.5 rounded-full bg-error text-on-error font-label-sm text-label-sm font-semibold';
+
+        calcCallout.className = 'rounded-xl bg-error-container/40 p-space-md flex flex-col gap-space-xs transition-colors';
+
+        validationBox.className = 'rounded-lg bg-error-container p-space-sm flex items-start gap-space-sm transition-all';
+        validationIcon.textContent = 'error';
+        validationIcon.className = 'material-symbols-outlined text-[20px] text-error shrink-0 mt-0.5';
+        validationTitle.textContent = 'Warning: Current < Previous';
+        validationTitle.className = 'font-label-md text-label-md font-bold text-on-error-container';
+        validationDesc.textContent = 'Field reading indicates dial roll-back or meter dial replacement. Verify physical meter index before submission.';
+        
+        submitBtn.disabled = true;
+        submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+      }
+    }
+
+    if (currentInput) {
+      currentInput.addEventListener('input', (e) => {
+        updateCalculations(e.target.value);
+      });
+    }
+
+    if (toggleSimBtn) {
+      let isSimulated = false;
+      toggleSimBtn.addEventListener('click', () => {
+        if (!isSimulated) {
+          currentInput.value = '14310';
+          updateCalculations(14310);
+          toggleSimBtn.textContent = 'Reset to Valid (14,820)';
+          isSimulated = true;
+        } else {
+          currentInput.value = '14820';
+          updateCalculations(14820);
+          toggleSimBtn.textContent = 'Test Negative Reading';
+          isSimulated = false;
+        }
+      });
+    }
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        currentInput.value = '14820';
+        updateCalculations(14820);
+        if (toggleSimBtn) toggleSimBtn.textContent = 'Test Negative Reading';
+      });
+    }
+
+    // Filter Chips interactive behavior
+    const filterChips = document.querySelectorAll('.filter-chip');
+    const auditItems = document.querySelectorAll('.audit-item');
+
+    filterChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        filterChips.forEach(c => {
+          c.classList.remove('bg-primary', 'text-on-primary', 'font-semibold', 'shadow-sm');
+          c.classList.add('bg-surface-container', 'text-on-surface');
+        });
+
+        chip.classList.remove('bg-surface-container', 'text-on-surface');
+        chip.classList.add('bg-primary', 'text-on-primary', 'font-semibold', 'shadow-sm');
+
+        const filter = chip.getAttribute('data-filter');
+        auditItems.forEach(item => {
+          const itemCat = item.getAttribute('data-category');
+          if (filter === 'all') {
+            item.style.display = 'flex';
+          } else if (filter === 'pending') {
+            // Demo empty state or hide all verified
+            item.style.display = 'none';
+          } else if (filter === 'completed') {
+            item.style.display = itemCat === 'completed' ? 'flex' : 'none';
+          } else if (filter === 'flagged') {
+            item.style.display = itemCat === 'flagged' ? 'flex' : 'none';
+          }
+        });
+      });
+    });
+
+    if (submitBtn) {
+      submitBtn.addEventListener('click', () => {
+        if (submitBtn.disabled) return;
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = `
+          <span class="material-symbols-outlined text-[20px] animate-spin">progress_activity</span>
+          <span>Generating Draft Invoice...</span>
+        `;
+        setTimeout(() => {
+          submitBtn.innerHTML = `
+            <span class="material-symbols-outlined text-[20px]">check_circle</span>
+            <span>Recorded & Draft Dispatched!</span>
+          `;
+          submitBtn.classList.remove('bg-primary');
+          submitBtn.classList.add('bg-tertiary-container', 'text-on-tertiary-container');
+          setTimeout(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.classList.add('bg-primary');
+            submitBtn.classList.remove('bg-tertiary-container', 'text-on-tertiary-container');
+          }, 2400);
+        }, 900);
+      });
+    }
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-1px_12px_rgba(0,0,0,0.04)]" data-active-classes="text-secondary font-bold"><div class="h-16 px-space-xs flex items-center justify-around"><a class="flex flex-col items-center justify-center flex-1 h-14 min-w-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="admin-dashboard" href="#"><span class="material-symbols-outlined text-[22px]">dashboard</span><span class="font-label-sm text-[11px] leading-tight mt-0.5">Dashboard</span></a><a class="flex flex-col items-center justify-center flex-1 h-14 min-w-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="bills-invoice" href="#"><span class="material-symbols-outlined text-[22px]">receipt_long</span><span class="font-label-sm text-[11px] leading-tight mt-0.5">Bills</span></a><a aria-current="page" class="flex flex-col items-center justify-center flex-1 h-14 min-w-[44px] transition-colors text-secondary font-bold" data-path="meter-readings" href="#"><span class="material-symbols-outlined text-[22px]">speed</span><span class="font-label-sm text-[11px] leading-tight mt-0.5">Readings</span></a><a class="flex flex-col items-center justify-center flex-1 h-14 min-w-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="customers" href="#"><span class="material-symbols-outlined text-[22px]">group</span><span class="font-label-sm text-[11px] leading-tight mt-0.5">Customers</span></a><button aria-label="Toggle Menu" class="flex flex-col items-center justify-center flex-1 h-14 min-w-[44px] text-on-surface-variant hover:text-on-surface transition-colors" onclick="document.getElementById('side-drawer').classList.remove('-translate-x-full');document.getElementById('drawer-overlay').classList.remove('opacity-0','pointer-events-none');" type="button"><span class="material-symbols-outlined text-[22px]">menu_open</span><span class="font-label-sm text-[11px] leading-tight mt-0.5">Menu</span></button></div></nav>
+
+<script>
+  (function initDashboardNavigation() {
+    const routes = {
+      'admin-dashboard': '../admin_dashboard/code.html',
+      'bills-invoice': '../bill_generation_invoice/code.html',
+      'meter-readings': '../meter_readings/code.html',
+      'customers': '../customer_management/code.html',
+      'meters': '../meter_management/code.html',
+      'payments': '../payments_management/code.html',
+      'dashboard': '../admin_dashboard/code.html',
+      'bills': '../bill_generation_invoice/code.html',
+      'readings': '../meter_readings/code.html',
+      'users': '../customer_management/code.html',
+      'consumers': '../customer_management/code.html',
+      'profile': '../customer_portal_consumption/code.html'
+    };
+
+    document.querySelectorAll('[data-path]').forEach((element) => {
+      const path = element.dataset.path;
+      const target = routes[path];
+      if (!target) return;
+
+      element.addEventListener('click', (event) => {
+        event.preventDefault();
+        window.location.href = target;
+      });
+    });
+
+    document.querySelectorAll('a[href="#"]').forEach((element) => {
+      const target = routes[element.dataset.path || ''];
+      if (!target) return;
+      element.addEventListener('click', (event) => {
+        event.preventDefault();
+        window.location.href = target;
+      });
+    });
+  })();
+</script>
+</body></html>

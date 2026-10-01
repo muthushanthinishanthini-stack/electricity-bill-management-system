@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Urja Command Grid — Full Project</title>
+    <style>
+      :root {
+        --bg: #f3f7ff;
+        --panel: #ffffff;
+        --panel-soft: #edf4ff;
+        --primary: #001229;
+        --primary-2: #0f2744;
+        --accent: #006398;
+        --text: #0b1c30;
+        --muted: #58708f;
+        --line: #dfe9ff;
+        --shadow: 0 14px 35px rgba(15, 39, 68, 0.12);
+      }
+
+      * { box-sizing: border-box; }
+
+      html, body {
+        margin: 0;
+        background: linear-gradient(180deg, #edf4ff 0%, #f8fbff 100%);
+        color: var(--text);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        height: 100%;
+      }
+
+      body {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      .app-shell {
+        display: flex;
+        width: 100%;
+        min-height: 100vh;
+      }
+
+      .sidebar {
+        width: 270px;
+        background: rgba(255,255,255,0.74);
+        backdrop-filter: blur(12px);
+        border-right: 1px solid var(--line);
+        padding: 18px 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 10px 14px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .brand-badge {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        display: grid;
+        place-items: center;
+        color: white;
+        font-weight: 800;
+        box-shadow: var(--shadow);
+      }
+
+      .brand-copy h1 {
+        margin: 0;
+        font-size: 15px;
+        line-height: 1.2;
+      }
+
+      .brand-copy span {
+        color: var(--muted);
+        font-size: 11px;
+      }
+
+      .nav-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .nav-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--muted);
+        padding: 8px 10px 4px;
+      }
+
+      .nav-btn {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        border: 1px solid transparent;
+        background: transparent;
+        color: var(--text);
+        border-radius: 12px;
+        padding: 11px 12px;
+        font-size: 14px;
+        font-weight: 600;
+        text-align: left;
+        cursor: pointer;
+        transition: 0.2s ease;
+      }
+
+      .nav-btn:hover,
+      .nav-btn.active {
+        background: linear-gradient(180deg, #edf5ff 0%, #dfeeff 100%);
+        border-color: var(--line);
+        box-shadow: inset 0 0 0 1px rgba(0,98,152,0.05);
+      }
+
+      .nav-icon {
+        width: 26px;
+        height: 26px;
+        border-radius: 8px;
+        background: #e9f3ff;
+        display: grid;
+        place-items: center;
+        color: var(--accent);
+        font-size: 15px;
+        font-weight: 700;
+      }
+
+      .content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+      }
+
+      .topbar {
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 24px;
+        background: rgba(255,255,255,0.7);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .topbar h2 {
+        margin: 0;
+        font-size: 18px;
+      }
+
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #ecfdf5;
+        color: #065f46;
+        padding: 8px 12px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .status-dot {
+        width: 8px;
+        height: 8px;
+        background: #10b981;
+        border-radius: 999px;
+        box-shadow: 0 0 0 8px rgba(16,185,129,0.12);
+      }
+
+      .frame-wrap {
+        flex: 1;
+        padding: 18px;
+      }
+
+      .frame-card {
+        width: 100%;
+        height: 100%;
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        background: white;
+      }
+
+      @media (max-width: 900px) {
+        .app-shell {
+          flex-direction: column;
+        }
+
+        .sidebar {
+          width: 100%;
+          border-right: none;
+          border-bottom: 1px solid var(--line);
+          padding-bottom: 10px;
+        }
+
+        .nav-group {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-badge">U</div>
+          <div class="brand-copy">
+            <h1>Urja Command Grid</h1>
+            <span>Electricity Bill Management</span>
+          </div>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-label">Portal</div>
+          <button class="nav-btn active" data-src="login_role_switch_1/code.html">
+            <span class="nav-icon">L</span>
+            Login / Role Switch
+          </button>
+          <button class="nav-btn" data-src="admin_dashboard/code.html">
+            <span class="nav-icon">D</span>
+            Admin Dashboard
+          </button>
+          <button class="nav-btn" data-src="customer_management/code.html">
+            <span class="nav-icon">C</span>
+            Customer Management
+          </button>
+          <button class="nav-btn" data-src="meter_management/code.html">
+            <span class="nav-icon">M</span>
+            Meter Management
+          </button>
+          <button class="nav-btn" data-src="meter_readings/code.html">
+            <span class="nav-icon">R</span>
+            Meter Readings
+          </button>
+          <button class="nav-btn" data-src="bill_generation_invoice/code.html">
+            <span class="nav-icon">B</span>
+            Bill Generation
+          </button>
+          <button class="nav-btn" data-src="payments_management/code.html">
+            <span class="nav-icon">P</span>
+            Payments
+          </button>
+          <button class="nav-btn" data-src="customer_portal_consumption/code.html">
+            <span class="nav-icon">U</span>
+            Consumer Portal
+          </button>
+          <button class="nav-btn" data-src="urjasetu_electricity_logo/code.html">
+            <span class="nav-icon">G</span>
+            Utility Branding
+          </button>
+        </div>
+      </aside>
+
+      <main class="content">
+        <div class="topbar">
+          <h2>Full Site Preview</h2>
+          <div class="status"><span class="status-dot"></span>System Online</div>
+        </div>
+
+        <div class="frame-wrap">
+          <div class="frame-card">
+            <iframe id="projectFrame" title="Project preview" src="login_role_switch_1/code.html"></iframe>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      const buttons = document.querySelectorAll('.nav-btn');
+      const frame = document.getElementById('projectFrame');
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          buttons.forEach((btn) => btn.classList.remove('active'));
+          button.classList.add('active');
+          frame.src = button.dataset.src;
+        });
+      });
+    </script>
+  </body>
+</html>

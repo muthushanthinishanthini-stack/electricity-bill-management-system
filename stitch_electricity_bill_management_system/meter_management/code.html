@@ -1,0 +1,745 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_tab" name="shell-type"><title>Electricity Bill Management System</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{width:100%;margin:0;padding:0;min-height:100%;}body{overscroll-behavior-y:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "tertiary-container": "#002d1d", "on-secondary-container": "#00476e", "error-container": "#ffdad6", "on-tertiary-fixed": "#002114", "inverse-on-surface": "#eaf1ff", "surface-container-high": "#dce9ff", "primary": "#001229", "on-secondary": "#ffffff", "primary-fixed-dim": "#b2c8ed", "surface": "#f8f9ff", "error": "#ba1a1a", "on-error-container": "#93000a", "on-surface-variant": "#44474d", "outline-variant": "#c4c6ce", "surface-container-lowest": "#ffffff", "tertiary-fixed-dim": "#68dba9", "on-primary-fixed-variant": "#324866", "on-tertiary-fixed-variant": "#005137", "surface-dim": "#cbdbf5", "surface-container-highest": "#d3e4fe", "secondary-container": "#5bb8fe", "on-tertiary-container": "#1fa072", "tertiary": "#00160c", "on-primary": "#ffffff", "outline": "#74777e", "on-primary-container": "#798fb1", "surface-container": "#e5eeff", "surface-bright": "#f8f9ff", "on-tertiary": "#ffffff", "secondary": "#006398", "tertiary-fixed": "#85f8c4", "surface-variant": "#d3e4fe", "on-error": "#ffffff", "on-surface": "#0b1c30", "secondary-fixed": "#cce5ff", "on-primary-fixed": "#021c39", "surface-container-low": "#eff4ff", "inverse-surface": "#213145", "secondary-fixed-dim": "#93ccff", "on-background": "#0b1c30", "surface-tint": "#4a5f7f", "inverse-primary": "#b2c8ed", "on-secondary-fixed-variant": "#004b73", "background": "#f8f9ff", "primary-fixed": "#d4e3ff", "on-secondary-fixed": "#001d31", "primary-container": "#0f2744" }, borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, spacing: { "space-sm": "0.5rem", "gutter": "1rem", "space-md": "1rem", "space-xs": "0.25rem", "margin-desktop": "2rem", "space-lg": "1.5rem", "gutter-desktop": "1.5rem", "space-xl": "2rem", "margin": "1rem" }, fontFamily: { "body-md": ["Hanken Grotesk"], "label-md": ["Hanken Grotesk"], "display-lg": ["Manrope"], "headline-lg": ["Manrope"], "metric-num-lg": ["Hanken Grotesk"], "title-lg": ["Manrope"], "display-lg-mobile": ["Manrope"], "headline-md": ["Manrope"], "body-sm": ["Hanken Grotesk"], "metric-num-md": ["Hanken Grotesk"], "label-sm": ["Hanken Grotesk"], "headline-xl": ["Manrope"], "body-lg": ["Hanken Grotesk"] }, fontSize: { "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "label-md": ["13px", { "lineHeight": "18px", "fontWeight": "500" }], "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "700" }], "headline-lg": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "metric-num-lg": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "title-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }], "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-md": ["18px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }], "metric-num-md": ["20px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface flex flex-col min-h-screen relative antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-gutter flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><button aria-label="Open Navigation Drawer" class="w-11 h-11 flex items-center justify-center text-on-surface hover:text-secondary rounded-lg active:scale-95 transition-all" onclick="document.getElementById('side-drawer').classList.remove('-translate-x-full');document.getElementById('drawer-overlay').classList.remove('opacity-0','pointer-events-none');" type="button"><span class="material-symbols-outlined text-[24px]">menu</span></button><img alt="Electricity Bill Management System Logo" class="h-8 w-auto object-contain shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1UHrVYwUFG-_MWAjb045klccl6AzLpsGZFlc_CoHfj2ifHKTAnqw631GbVUW3xOYGvMCC22BHyyYk1hpnr38SUFvj49cMxaRZeQSaMF6y-R67YQnAGADSXOIYgEz3x2PGbxefu7Xp2Vx_tm-34rhsgNnjaDqCu4uRys6dqhbcFG4snf246eQ9GuspmOTG40KClG2g1jUbY-Ke-Si6YaHtwmK84b94btCYczuKthk5UjWdg0k9nqb6up3ZTV"><div class="flex flex-col min-w-0"><span class="font-title-lg text-title-lg text-primary truncate leading-tight">Electricity Bill</span><span class="font-label-sm text-label-sm text-secondary truncate font-semibold uppercase tracking-wider">Management System</span></div></div><div class="flex items-center gap-space-xs shrink-0"><span class="hidden xs:inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm tracking-normal uppercase">Admin</span><button aria-label="Notifications" class="relative w-11 h-11 flex items-center justify-center text-on-surface-variant hover:text-on-surface active:scale-95 transition-all" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2 right-2 flex items-center justify-center min-w-[16px] h-4 px-1 rounded-full bg-error text-on-error font-label-sm text-[10px] font-bold leading-none">3</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><div class="fixed inset-0 z-50 bg-primary/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300" id="drawer-overlay" onclick="document.getElementById('side-drawer').classList.add('-translate-x-full');this.classList.add('opacity-0','pointer-events-none');"></div><aside class="fixed top-0 left-0 bottom-0 z-50 w-72 max-w-[80vw] bg-surface-container-lowest shadow-[0_4px_24px_rgba(0,18,41,0.12)] -translate-x-full transition-transform duration-300 flex flex-col pt-safe pb-safe" id="side-drawer"><div class="h-16 px-gutter flex items-center justify-between bg-surface-container-low"><div class="flex items-center gap-space-sm"><img alt="Electricity Bill Management System Logo" class="h-7 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UHrVYwUFG-_MWAjb045klccl6AzLpsGZFlc_CoHfj2ifHKTAnqw631GbVUW3xOYGvMCC22BHyyYk1hpnr38SUFvj49cMxaRZeQSaMF6y-R67YQnAGADSXOIYgEz3x2PGbxefu7Xp2Vx_tm-34rhsgNnjaDqCu4uRys6dqhbcFG4snf246eQ9GuspmOTG40KClG2g1jUbY-Ke-Si6YaHtwmK84b94btCYczuKthk5UjWdg0k9nqb6up3ZTV"><span class="font-title-lg text-title-lg text-primary">Electricity Bill Management System</span></div><button aria-label="Close Drawer" class="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:text-on-surface" onclick="document.getElementById('side-drawer').classList.add('-translate-x-full');document.getElementById('drawer-overlay').classList.add('opacity-0','pointer-events-none');" type="button"><span class="material-symbols-outlined text-[22px]">close</span></button></div><div class="px-gutter py-space-sm bg-surface-container-low"><div class="flex items-center justify-between p-space-xs bg-surface rounded-lg"><span class="font-label-sm text-label-sm text-on-surface-variant px-space-xs">Active Role:</span><button class="flex items-center gap-1 px-2.5 py-1 rounded bg-primary text-on-primary font-label-sm text-label-sm" type="button"><span class="material-symbols-outlined text-[14px]">swap_horiz</span>Admin</button></div></div><nav class="flex-1 overflow-y-auto px-space-sm py-space-md space-y-1" data-active-classes="bg-secondary-fixed text-on-secondary-fixed font-semibold"><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="login-switch-role" href="#"><span class="material-symbols-outlined text-[22px]">manage_accounts</span><span class="font-label-md text-label-md">Login / Switch Role</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="admin-dashboard" href="#"><span class="material-symbols-outlined text-[22px]">dashboard</span><span class="font-label-md text-label-md">Admin Dashboard</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="customers" href="#"><span class="material-symbols-outlined text-[22px]">group</span><span class="font-label-md text-label-md">Customers</span></a><a aria-current="page" class="flex items-center gap-space-md px-space-md h-12 rounded-lg transition-all bg-secondary-fixed text-on-secondary-fixed font-semibold" data-path="meters" href="#"><span class="material-symbols-outlined text-[22px]">electric_meter</span><span class="font-label-md text-label-md">Meters</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="meter-readings" href="#"><span class="material-symbols-outlined text-[22px]">speed</span><span class="font-label-md text-label-md">Meter Readings</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="bills-invoice" href="#"><span class="material-symbols-outlined text-[22px]">receipt_long</span><span class="font-label-md text-label-md">Bills &amp; Invoice</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="payments" href="#"><span class="material-symbols-outlined text-[22px]">payments</span><span class="font-label-md text-label-md">Payments</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="tariff-slabs" href="#"><span class="material-symbols-outlined text-[22px]">stacked_bar_chart</span><span class="font-label-md text-label-md">Tariff Slabs</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="reports" href="#"><span class="material-symbols-outlined text-[22px]">analytics</span><span class="font-label-md text-label-md">Reports</span></a><a class="flex items-center gap-space-md px-space-md h-12 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="customer-portal" href="#"><span class="material-symbols-outlined text-[22px]">account_circle</span><span class="font-label-md text-label-md">Customer Portal</span></a></nav><div class="p-gutter bg-surface-container-low flex items-center justify-between"><div class="flex items-center gap-space-xs"><div class="w-2.5 h-2.5 rounded-full bg-tertiary-fixed-dim"></div><span class="font-label-sm text-label-sm text-on-surface-variant">Grid Telemetry Online</span></div><span class="font-label-sm text-label-sm text-secondary font-bold">v3.4.1</span></div></aside><main class="flex-1 flex flex-col relative w-full pt-16 pb-20 bg-surface min-h-[calc(100vh-5rem)]"><div class="flex flex-col w-full pb-10">
+<!-- Sub-header & Action Bar -->
+<section class="px-gutter pt-space-md pb-space-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between gap-space-sm">
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-secondary uppercase font-bold tracking-wider">Infrastructure Grid</span>
+<h1 class="font-headline-lg text-headline-lg text-primary truncate">Meter Fleet Registry</h1>
+</div>
+<button class="shrink-0 flex items-center gap-1.5 px-3.5 py-2.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md shadow-md active:scale-95 transition-all" id="openModalBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span class="">Provision Meter</span>
+</button>
+</div>
+<!-- Micro telemetry sync pulse badge -->
+<div class="flex items-center justify-between px-3 py-2 rounded-lg bg-surface-container-low shadow-sm">
+<div class="flex items-center gap-2">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-fixed-dim opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-on-tertiary-container"></span>
+</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">NB-IoT Heartbeat Synced (12s ago)</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">99.4% Link Integrity</span>
+</div>
+</section>
+<!-- Metric Quick Tiles (Horizontal scrollable & compact grid) -->
+<section class="px-gutter py-space-xs">
+<div class="grid grid-cols-2 gap-space-sm">
+<!-- Total Installed -->
+<div class="p-3.5 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Total Installed</span>
+<div class="w-7 h-7 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">grid_view</span>
+</div>
+</div>
+<div class="mt-2 flex items-baseline justify-between">
+<span class="font-metric-num-lg text-metric-num-lg text-primary">1,248</span>
+<span class="font-label-sm text-label-sm text-on-tertiary-container font-semibold">+14 this mo</span>
+</div>
+</div>
+<!-- Smart Digital -->
+<div class="p-3.5 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Smart Digital</span>
+<div class="w-7 h-7 rounded-lg bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[18px]">cell_tower</span>
+</div>
+</div>
+<div class="mt-2 flex items-baseline justify-between">
+<span class="font-metric-num-lg text-metric-num-lg text-secondary">1,196</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">95.8% AMI</span>
+</div>
+</div>
+<!-- Analog / Legacy -->
+<div class="p-3.5 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Legacy Analog</span>
+<div class="w-7 h-7 rounded-lg bg-surface-container flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[18px]">rotate_right</span>
+</div>
+</div>
+<div class="mt-2 flex items-baseline justify-between">
+<span class="font-metric-num-lg text-metric-num-lg text-on-surface-variant">52</span>
+<span class="font-label-sm text-label-sm text-outline font-semibold">Phase Out</span>
+</div>
+</div>
+<!-- Faulty / Offline -->
+<div class="p-3.5 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-error font-medium">Faulty / Offline</span>
+<div class="w-7 h-7 rounded-lg bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+</div>
+</div>
+<div class="mt-2 flex items-baseline justify-between">
+<span class="font-metric-num-lg text-metric-num-lg text-error">8</span>
+<span class="font-label-sm text-label-sm text-error font-semibold">Urgent Tech</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Search & Filter Controls -->
+<section class="px-gutter pt-space-md pb-space-xs flex flex-col gap-space-sm">
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="w-full h-11 pl-10 pr-10 rounded-xl bg-surface-container-lowest text-on-surface placeholder:text-outline font-body-md text-body-md shadow-sm focus:outline-none focus:bg-surface-container-low transition-all" id="meterSearchInput" placeholder="Search meter number, SIM/UUID or consumer..." type="text">
+<button aria-label="Clear Search" class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-outline hover:text-on-surface" id="clearSearchBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- Filter Pills (Scrollable Row) -->
+<div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1 text-nowrap">
+<button class="filter-pill active px-3.5 py-1.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm shadow-sm transition-all" data-filter="all">All (1,248)</button>
+<button class="filter-pill px-3.5 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-sm text-label-sm transition-all" data-filter="smart">Smart Prepaid</button>
+<button class="filter-pill px-3.5 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-sm text-label-sm transition-all" data-filter="postpaid">Postpaid Digital</button>
+<button class="filter-pill px-3.5 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-sm text-label-sm transition-all" data-filter="single">Single Phase</button>
+<button class="filter-pill px-3.5 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-sm text-label-sm transition-all" data-filter="three">Three Phase</button>
+<button class="filter-pill px-3.5 py-1.5 rounded-full bg-surface-container-low text-error hover:bg-error-container font-label-sm text-label-sm transition-all" data-filter="maintenance">Under Maintenance</button>
+</div>
+</section>
+<!-- Meter Cards List -->
+<section class="px-gutter pt-space-xs flex flex-col gap-space-sm" id="meterList">
+<!-- Card 1 -->
+<article class="meter-card bg-surface-container-lowest rounded-xl p-4 shadow-sm flex flex-col gap-3 transition-all hover:shadow-md" data-category="smart single">
+<div class="flex items-start justify-between gap-2">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined text-[20px]">electric_meter</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-md text-headline-md text-primary truncate">#MTR-88210</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-[10px] uppercase font-bold tracking-tight">IoT Smart</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Consumer: <span class="font-label-md text-on-surface font-semibold">Arun Kumar</span> (CUST-1048)</p>
+</div>
+</div>
+<span class="shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-low text-on-tertiary-container font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+          Active Online
+        </span>
+</div>
+<!-- Meter Specifics & Reading Telemetry Box -->
+<div class="grid grid-cols-2 gap-2 p-3 rounded-lg bg-surface-container-low">
+<div class="flex flex-col">
+<span class="font-label-sm text-[11px] text-outline uppercase font-semibold">Current Reading</span>
+<div class="flex items-baseline gap-1 mt-0.5">
+<span class="font-metric-num-md text-metric-num-md text-primary">14,820</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">kWh</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-[11px] text-outline uppercase font-semibold">Signal &amp; Link</span>
+<div class="flex items-center gap-1.5 mt-1">
+<span class="material-symbols-outlined text-secondary text-[16px]">signal_cellular_alt</span>
+<span class="font-label-md text-label-md text-secondary font-semibold">98% Strong</span>
+</div>
+</div>
+</div>
+<!-- Secondary Meta -->
+<div class="flex items-center justify-between text-outline font-body-sm text-body-sm px-0.5">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+          Installed: 14 Jan 2022
+        </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+          Seal: <span class="font-mono text-on-surface-variant">MH-DIS-88329</span>
+</span>
+</div>
+<!-- Quick Action Bar -->
+<div class="pt-2 flex items-center justify-between gap-1.5 bg-surface-container-lowest">
+<button class="btn-sync flex-1 flex items-center justify-center gap-1 py-2 px-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-secondary font-label-sm text-label-sm font-semibold transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+<span class="">Force Sync</span>
+</button>
+<button class="btn-audit flex-1 flex items-center justify-center gap-1 py-2 px-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-semibold transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">history</span>
+<span class="">Audit Log</span>
+</button>
+<button class="btn-lock px-3 py-2 rounded-lg bg-surface-container-low hover:bg-error-container text-on-surface-variant hover:text-error transition-all" title="Deactivate/Lock Relay" type="button">
+<span class="material-symbols-outlined text-[16px]">power_settings_new</span>
+</button>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="meter-card bg-surface-container-lowest rounded-xl p-4 shadow-sm flex flex-col gap-3 transition-all hover:shadow-md" data-category="three postpaid">
+<div class="flex items-start justify-between gap-2">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">precision_manufacturing</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-md text-headline-md text-primary truncate">#MTR-77319</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface font-label-sm text-[10px] uppercase font-bold tracking-tight">3-Phase Comm</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Consumer: <span class="font-label-md text-on-surface font-semibold">Priya Sharma</span> (CUST-2189)</p>
+</div>
+</div>
+<span class="shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-low text-on-tertiary-container font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+          Active Online
+        </span>
+</div>
+<!-- Meter Specifics & Reading Telemetry Box -->
+<div class="grid grid-cols-2 gap-2 p-3 rounded-lg bg-surface-container-low">
+<div class="flex flex-col">
+<span class="font-label-sm text-[11px] text-outline uppercase font-semibold">Current Reading</span>
+<div class="flex items-baseline gap-1 mt-0.5">
+<span class="font-metric-num-md text-metric-num-md text-primary">38,450</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">kWh</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-[11px] text-outline uppercase font-semibold">Signal &amp; Link</span>
+<div class="flex items-center gap-1.5 mt-1">
+<span class="material-symbols-outlined text-secondary text-[16px]">signal_cellular_alt</span>
+<span class="font-label-md text-label-md text-secondary font-semibold">92% Normal</span>
+</div>
+</div>
+</div>
+<!-- Secondary Meta -->
+<div class="flex items-center justify-between text-outline font-body-sm text-body-sm px-0.5">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+          Installed: 08 Mar 2021
+        </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+          Seal: <span class="font-mono text-on-surface-variant">MH-IND-40911</span>
+</span>
+</div>
+<!-- Quick Action Bar -->
+<div class="pt-2 flex items-center justify-between gap-1.5 bg-surface-container-lowest">
+<button class="btn-sync flex-1 flex items-center justify-center gap-1 py-2 px-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-secondary font-label-sm text-label-sm font-semibold transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+<span class="">Force Sync</span>
+</button>
+<button class="btn-audit flex-1 flex items-center justify-center gap-1 py-2 px-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-semibold transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">history</span>
+<span class="">Audit Log</span>
+</button>
+<button class="btn-lock px-3 py-2 rounded-lg bg-surface-container-low hover:bg-error-container text-on-surface-variant hover:text-error transition-all" title="Deactivate/Lock Relay" type="button">
+<span class="material-symbols-outlined text-[16px]">power_settings_new</span>
+</button>
+</div>
+</article>
+<!-- Card 3 (Warning state) -->
+<article class="meter-card bg-surface-container-lowest rounded-xl p-4 shadow-sm flex flex-col gap-3 transition-all hover:shadow-md" data-category="single maintenance">
+<div class="flex items-start justify-between gap-2">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-9 h-9 rounded-lg bg-error-container flex items-center justify-center text-error shrink-0">
+<span class="material-symbols-outlined text-[20px]">gpp_maybe</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-md text-headline-md text-primary truncate">#MTR-66102</span>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-[10px] uppercase font-bold tracking-tight">1-Phase Std</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Consumer: <span class="font-label-md text-on-surface font-semibold">Karthik Raman</span> (CUST-4112)</p>
+</div>
+</div>
+<span class="shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-pulse"></span>
+          Tamper Alert
+        </span>
+</div>
+<!-- Meter Specifics & Reading Telemetry Box -->
+<div class="grid grid-cols-2 gap-2 p-3 rounded-lg bg-surface-container-low">
+<div class="flex flex-col">
+<span class="font-label-sm text-[11px] text-outline uppercase font-semibold">Current Reading</span>
+<div class="flex items-baseline gap-1 mt-0.5">
+<span class="font-metric-num-md text-metric-num-md text-primary">21,110</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">kWh</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-[11px] text-outline uppercase font-semibold">Signal &amp; Link</span>
+<div class="flex items-center gap-1.5 mt-1">
+<span class="material-symbols-outlined text-outline text-[16px]">signal_cellular_alt_2_bar</span>
+<span class="font-label-md text-label-md text-outline font-semibold">84% Intermittent</span>
+</div>
+</div>
+</div>
+<!-- Secondary Meta -->
+<div class="flex items-center justify-between text-outline font-body-sm text-body-sm px-0.5">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+          Installed: 19 Jun 2020
+        </span>
+<span class="flex items-center gap-1 text-error font-medium">
+<span class="material-symbols-outlined text-[14px]">report_problem</span>
+          Cover Breach Detect
+        </span>
+</div>
+<!-- Quick Action Bar -->
+<div class="pt-2 flex items-center justify-between gap-1.5 bg-surface-container-lowest">
+<button class="btn-sync flex-1 flex items-center justify-center gap-1 py-2 px-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-secondary font-label-sm text-label-sm font-semibold transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+<span class="">Diagnostics</span>
+</button>
+<button class="btn-audit flex-1 flex items-center justify-center gap-1 py-2 px-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-semibold transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">assignment</span>
+<span class="">Dispatch Field</span>
+</button>
+<button class="btn-lock px-3 py-2 rounded-lg bg-error text-on-error shadow-sm hover:bg-on-error-container transition-all" title="Isolate / Lock Relay" type="button">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+</button>
+</div>
+</article>
+<!-- Card 4 -->
+<article class="meter-card bg-surface-container-lowest rounded-xl p-4 shadow-sm flex flex-col gap-3 transition-all hover:shadow-md" data-category="smart single">
+<div class="flex items-start justify-between gap-2">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center text-on-tertiary-container shrink-0">
+<span class="material-symbols-outlined text-[20px]">solar_power</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-md text-headline-md text-primary truncate">#MTR-55490</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-[10px] uppercase font-bold tracking-tight">Solar Net-Meter</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Consumer: <span class="font-label-md text-on-surface font-semibold">Divya Nair</span> (CUST-5510)</p>
+</div>
+</div>
+<span class="shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-low text-on-tertiary-container font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+          Active Online
+        </span>
+</div>
+<!-- Meter Specifics & Reading Telemetry Box -->
+<div class="grid grid-cols-2 gap-2 p-3 rounded-lg bg-surface-container-low">
+<div class="flex flex-col">
+<span class="font-label-sm text-[11px] text-outline uppercase font-semibold">Current Reading</span>
+<div class="flex items-baseline gap-1 mt-0.5">
+<span class="font-metric-num-md text-metric-num-md text-primary">8,920</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">kWh Net</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-[11px] text-outline uppercase font-semibold">Signal &amp; Link</span>
+<div class="flex items-center gap-1.5 mt-1">
+<span class="material-symbols-outlined text-secondary text-[16px]">wifi_tethering</span>
+<span class="font-label-md text-label-md text-secondary font-semibold">99% Fiber AMI</span>
+</div>
+</div>
+</div>
+<!-- Secondary Meta -->
+<div class="flex items-center justify-between text-outline font-body-sm text-body-sm px-0.5">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+          Installed: 02 Nov 2023
+        </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">sync_alt</span>
+          Net Export: <span class="text-on-tertiary-container font-semibold">3.4 MWh</span>
+</span>
+</div>
+<!-- Quick Action Bar -->
+<div class="pt-2 flex items-center justify-between gap-1.5 bg-surface-container-lowest">
+<button class="btn-sync flex-1 flex items-center justify-center gap-1 py-2 px-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-secondary font-label-sm text-label-sm font-semibold transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+<span class="">Force Sync</span>
+</button>
+<button class="btn-audit flex-1 flex items-center justify-center gap-1 py-2 px-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-semibold transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">history</span>
+<span class="">Audit Log</span>
+</button>
+<button class="btn-lock px-3 py-2 rounded-lg bg-surface-container-low hover:bg-error-container text-on-surface-variant hover:text-error transition-all" title="Deactivate/Lock Relay" type="button">
+<span class="material-symbols-outlined text-[16px]">power_settings_new</span>
+</button>
+</div>
+</article>
+<!-- Empty Search State Placeholder -->
+<div class="hidden p-8 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col items-center justify-center text-center" id="noResultsState">
+<div class="w-14 h-14 rounded-full bg-surface-container-high flex items-center justify-center text-outline mb-3">
+<span class="material-symbols-outlined text-[28px]">search_off</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary">No Matching Meters Found</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 max-w-xs">Verify meter serial number, UUID, or consumer name and try again.</p>
+</div>
+</section>
+<!-- Interactive Modal Dialog: Provision / Assign Meter -->
+<div class="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-primary/60 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300" id="provisionModal">
+<div class="w-full sm:max-w-lg bg-surface-container-lowest rounded-t-2xl sm:rounded-2xl shadow-2xl p-gutter flex flex-col max-h-[90vh] overflow-y-auto transform translate-y-8 transition-transform duration-300" id="modalPanel">
+<!-- Modal Header -->
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-lg bg-primary text-on-primary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[20px]">add_to_queue</span>
+</div>
+<div>
+<h2 class="font-title-lg text-title-lg text-primary">Provision New Meter</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Deploy digital asset to consumer line</p>
+</div>
+</div>
+<button aria-label="Close modal" class="w-8 h-8 rounded-lg flex items-center justify-center text-outline hover:text-on-surface hover:bg-surface-container-low transition-colors" id="closeModalBtn" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Form Content -->
+<form class="flex flex-col gap-space-sm pt-2" id="provisionForm" onsubmit="event.preventDefault();">
+<!-- Serial Number Field -->
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-label-md text-on-surface font-semibold flex items-center justify-between" for="meterSerial">
+<span class="">Meter Serial Number</span>
+<span class="text-secondary font-mono text-[11px]">Auto-Gen Available</span>
+</label>
+<div class="relative">
+<input class="w-full h-11 px-3.5 rounded-lg bg-surface-container-low text-primary font-mono text-body-md focus:outline-none focus:bg-surface-container-high transition-all" id="meterSerial" required="" type="text" value="MTR-2024-9981">
+<button class="absolute right-2 top-2 px-2 py-1 rounded bg-surface text-secondary hover:bg-surface-container font-label-sm text-[11px] font-semibold transition-all" id="regenSerialBtn" type="button">
+              Shuffle
+            </button>
+</div>
+</div>
+<!-- Customer Assignee Selection -->
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="consumerSelect">Consumer Assignee</label>
+<div class="relative">
+<select class="w-full h-11 px-3.5 pr-8 appearance-none rounded-lg bg-surface-container-low text-primary font-body-md text-body-md focus:outline-none focus:bg-surface-container-high transition-all" id="consumerSelect">
+<option selected="" value="CUST-1048">Arun Kumar (CUST-1048) • Ward 4 Sector B</option>
+<option value="CUST-2189">Priya Sharma (CUST-2189) • Ind Area Gate 2</option>
+<option value="CUST-4112">Karthik Raman (CUST-4112) • Green Hills 12</option>
+<option value="CUST-5510">Divya Nair (CUST-5510) • Eco Park Phase 3</option>
+<option value="CUST-6109">Sunil Varma (CUST-6109) • Market Yard Complex</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-outline">
+<span class="material-symbols-outlined text-[18px]">unfold_more</span>
+</div>
+</div>
+</div>
+<!-- Meter Hardware Profile -->
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-label-md text-on-surface font-semibold">Meter Hardware Profile</label>
+<div class="grid grid-cols-1 gap-2">
+<label class="flex items-center gap-3 p-3 rounded-lg bg-surface-container-low hover:bg-surface-container cursor-pointer transition-colors">
+<input checked="" class="accent-primary w-4 h-4" name="meter_profile" type="radio" value="Smart Bidirectional (Solar net)">
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-primary font-semibold">Smart Bidirectional (Solar net)</span>
+<span class="font-body-sm text-[11px] text-on-surface-variant">IoT GPRS/NB-IoT + Net import/export register</span>
+</div>
+</label>
+<label class="flex items-center gap-3 p-3 rounded-lg bg-surface-container-low hover:bg-surface-container cursor-pointer transition-colors">
+<input class="accent-primary w-4 h-4" name="meter_profile" type="radio" value="Single Phase Digital">
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-primary font-semibold">Single Phase Digital AMI</span>
+<span class="font-body-sm text-[11px] text-on-surface-variant">Standard domestic residential (Up to 10 kW)</span>
+</div>
+</label>
+<label class="flex items-center gap-3 p-3 rounded-lg bg-surface-container-low hover:bg-surface-container cursor-pointer transition-colors">
+<input class="accent-primary w-4 h-4" name="meter_profile" type="radio" value="Three Phase Industrial">
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-primary font-semibold">Three Phase Industrial LT-CT</span>
+<span class="font-body-sm text-[11px] text-on-surface-variant">High tension / commercial current transformer paired</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Two-column inputs: Install Date & Initial Reading -->
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="installDate">Commission Date</label>
+<input class="w-full h-11 px-3 rounded-lg bg-surface-container-low text-primary font-body-md text-body-md focus:outline-none focus:bg-surface-container-high transition-all" id="installDate" type="date" value="2024-04-12">
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="initialReading">Initial kWh</label>
+<input class="w-full h-11 px-3 rounded-lg bg-surface-container-low text-primary font-mono text-body-md focus:outline-none focus:bg-surface-container-high transition-all" id="initialReading" type="text" value="00000.0">
+</div>
+</div>
+<!-- Seal Number Input -->
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="sealNumber">Physical Seal Serial #</label>
+<div class="relative">
+<input class="w-full h-11 px-3.5 rounded-lg bg-surface-container-low text-primary font-mono text-body-md focus:outline-none focus:bg-surface-container-high transition-all" id="sealNumber" type="text" value="MH-DIS-88329">
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-on-tertiary-container">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</div>
+</div>
+</div>
+<!-- Feedback Alert box in Modal -->
+<div class="p-3 rounded-lg bg-surface-container flex items-start gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[20px] shrink-0 mt-0.5">info</span>
+<p class="font-body-sm text-[12px] text-on-surface leading-tight">
+            Provisioning triggers a physical pairing handshake over the local mesh. Please confirm consumer authorization before energizing the contactor.
+          </p>
+</div>
+<!-- Action Buttons -->
+<div class="pt-2 flex items-center justify-end gap-space-sm">
+<button class="px-4 py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md font-semibold transition-all" id="cancelModalBtn" type="button">
+            Cancel
+          </button>
+<button class="flex-1 sm:flex-none px-5 py-2.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold shadow-md active:scale-95 transition-all flex items-center justify-center gap-1.5" id="submitProvisionBtn" type="submit">
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+<span class="">Energize &amp; Commission</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+<!-- Notification Toast (Dynamic feedback) -->
+<div class="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 max-w-xs w-full px-4 py-3 rounded-xl bg-primary text-on-primary shadow-xl flex items-center gap-2.5 pointer-events-none opacity-0 translate-y-3 transition-all duration-300" id="toastFeedback">
+<span class="material-symbols-outlined text-secondary-fixed text-[20px]" id="toastIcon">check_circle</span>
+<span class="font-label-md text-label-md truncate" id="toastMessage">Action executed successfully</span>
+</div>
+</div>
+<script>
+  (function initMeterScreen() {
+    // Elements
+    const openModalBtn = document.getElementById('openModalBtn');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const cancelModalBtn = document.getElementById('cancelModalBtn');
+    const provisionModal = document.getElementById('provisionModal');
+    const modalPanel = document.getElementById('modalPanel');
+    const provisionForm = document.getElementById('provisionForm');
+    const regenSerialBtn = document.getElementById('regenSerialBtn');
+    const meterSerial = document.getElementById('meterSerial');
+    const toast = document.getElementById('toastFeedback');
+    const toastMsg = document.getElementById('toastMessage');
+    const toastIcon = document.getElementById('toastIcon');
+
+    const searchInput = document.getElementById('meterSearchInput');
+    const clearSearchBtn = document.getElementById('clearSearchBtn');
+    const filterPills = document.querySelectorAll('.filter-pill');
+    const meterCards = document.querySelectorAll('.meter-card');
+    const noResults = document.getElementById('noResultsState');
+
+    // Toast Trigger
+    function showToast(message, icon = 'check_circle') {
+      toastMsg.textContent = message;
+      toastIcon.textContent = icon;
+      toast.classList.remove('opacity-0', 'translate-y-3', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-3', 'pointer-events-none');
+      }, 3000);
+    }
+
+    // Modal Handlers
+    function openModal() {
+      provisionModal.classList.remove('opacity-0', 'pointer-events-none');
+      modalPanel.classList.remove('translate-y-8');
+    }
+
+    function closeModal() {
+      modalPanel.classList.add('translate-y-8');
+      provisionModal.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    openModalBtn?.addEventListener('click', openModal);
+    closeModalBtn?.addEventListener('click', closeModal);
+    cancelModalBtn?.addEventListener('click', closeModal);
+    provisionModal?.addEventListener('click', (e) => {
+      if (e.target === provisionModal) closeModal();
+    });
+
+    // Shuffle Serial helper
+    regenSerialBtn?.addEventListener('click', () => {
+      const rand = Math.floor(1000 + Math.random() * 9000);
+      meterSerial.value = `MTR-2024-${rand}`;
+      showToast('Generated fresh factory UUID', 'autorenew');
+    });
+
+    // Submit form: Append newly added card dynamically to delight the user
+    provisionForm?.addEventListener('submit', () => {
+      const serial = meterSerial.value || 'MTR-2024-001';
+      const custSelect = document.getElementById('consumerSelect');
+      const custText = custSelect.options[custSelect.selectedIndex].text.split('•')[0].trim();
+      const typeOption = document.querySelector('input[name="meter_profile"]:checked')?.value || 'Smart Bidirectional';
+      const initialKwh = document.getElementById('initialReading').value || '00000.0';
+
+      // Insert new card at top of list
+      const newCard = document.createElement('article');
+      newCard.className = 'meter-card bg-surface-container-lowest rounded-xl p-4 shadow-sm flex flex-col gap-3 transition-all animate-pulse';
+      newCard.setAttribute('data-category', 'smart single');
+      newCard.innerHTML = `
+        <div class="flex items-start justify-between gap-2">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center text-on-tertiary-container shrink-0">
+              <span class="material-symbols-outlined text-[20px]">bolt</span>
+            </div>
+            <div class="min-w-0">
+              <div class="flex items-center gap-1.5">
+                <span class="font-headline-md text-headline-md text-primary truncate">#${serial}</span>
+                <span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-[10px] uppercase font-bold tracking-tight">Newly Assigned</span>
+              </div>
+              <p class="font-body-sm text-body-sm text-on-surface-variant truncate">Consumer: <span class="font-label-md text-on-surface font-semibold">${custText}</span></p>
+            </div>
+          </div>
+          <span class="shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-low text-on-tertiary-container font-label-sm text-label-sm font-semibold">
+            <span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+            Provisioned
+          </span>
+        </div>
+        <div class="grid grid-cols-2 gap-2 p-3 rounded-lg bg-surface-container-low">
+          <div class="flex flex-col">
+            <span class="font-label-sm text-[11px] text-outline uppercase font-semibold">Initial Meter Reading</span>
+            <div class="flex items-baseline gap-1 mt-0.5">
+              <span class="font-metric-num-md text-metric-num-md text-primary">${initialKwh}</span>
+              <span class="font-label-sm text-label-sm text-on-surface-variant font-medium">kWh</span>
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-label-sm text-[11px] text-outline uppercase font-semibold">Telemetry Status</span>
+            <div class="flex items-center gap-1.5 mt-1">
+              <span class="material-symbols-outlined text-secondary text-[16px]">sensors</span>
+              <span class="font-label-md text-label-md text-secondary font-semibold">Pairing Mesh...</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center justify-between text-outline font-body-sm text-body-sm px-0.5">
+          <span class="flex items-center gap-1">
+            <span class="material-symbols-outlined text-[14px]">calendar_today</span>
+            Installed: Today
+          </span>
+          <span class="flex items-center gap-1">
+            <span class="material-symbols-outlined text-[14px]">category</span>
+            ${typeOption.split(' ')[0]} Phase
+          </span>
+        </div>
+      `;
+
+      const list = document.getElementById('meterList');
+      list.prepend(newCard);
+      setTimeout(() => newCard.classList.remove('animate-pulse'), 1200);
+
+      closeModal();
+      showToast(`Provisioned ${serial} to line`, 'check_circle');
+    });
+
+    // Quick Action button listeners
+    document.addEventListener('click', (e) => {
+      const syncBtn = e.target.closest('.btn-sync');
+      const auditBtn = e.target.closest('.btn-audit');
+      const lockBtn = e.target.closest('.btn-lock');
+
+      if (syncBtn) {
+        syncBtn.classList.add('animate-spin');
+        setTimeout(() => {
+          syncBtn.classList.remove('animate-spin');
+          showToast('Telemetry delta synchronized', 'cloud_done');
+        }, 800);
+      } else if (auditBtn) {
+        showToast('Loaded 30-day packet log', 'history_edu');
+      } else if (lockBtn) {
+        const isLocked = lockBtn.dataset.locked === 'true';
+        if (isLocked) {
+          lockBtn.dataset.locked = 'false';
+          lockBtn.classList.remove('bg-error', 'text-on-error');
+          lockBtn.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+          showToast('Contactor relay energized / unlocked', 'lock_open');
+        } else {
+          lockBtn.dataset.locked = 'true';
+          lockBtn.classList.add('bg-error', 'text-on-error');
+          lockBtn.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+          showToast('Meter contactor disconnected / locked', 'lock');
+        }
+      }
+    });
+
+    // Live Filtering and Search Logic
+    let currentFilter = 'all';
+
+    function applyFilters() {
+      const query = (searchInput.value || '').trim().toLowerCase();
+      let matchCount = 0;
+
+      meterCards.forEach((card) => {
+        const text = card.textContent.toLowerCase();
+        const category = card.getAttribute('data-category') || '';
+
+        const matchesQuery = !query || text.includes(query);
+        const matchesCategory = currentFilter === 'all' || category.includes(currentFilter);
+
+        if (matchesQuery && matchesCategory) {
+          card.classList.remove('hidden');
+          matchCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      if (noResults) {
+        if (matchCount === 0) {
+          noResults.classList.remove('hidden');
+        } else {
+          noResults.classList.add('hidden');
+        }
+      }
+    }
+
+    searchInput?.addEventListener('input', () => {
+      if (searchInput.value.length > 0) {
+        clearSearchBtn.classList.remove('hidden');
+      } else {
+        clearSearchBtn.classList.add('hidden');
+      }
+      applyFilters();
+    });
+
+    clearSearchBtn?.addEventListener('click', () => {
+      searchInput.value = '';
+      clearSearchBtn.classList.add('hidden');
+      applyFilters();
+    });
+
+    filterPills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        filterPills.forEach((p) => {
+          p.classList.remove('bg-primary', 'text-on-primary');
+          p.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+        });
+        pill.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+        pill.classList.add('bg-primary', 'text-on-primary');
+
+        currentFilter = pill.getAttribute('data-filter') || 'all';
+        applyFilters();
+      });
+    });
+
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-1px_12px_rgba(0,0,0,0.04)]" data-active-classes="text-secondary font-bold"><div class="h-16 px-space-xs flex items-center justify-around"><a class="flex flex-col items-center justify-center flex-1 h-14 min-w-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="admin-dashboard" href="#"><span class="material-symbols-outlined text-[22px]">dashboard</span><span class="font-label-sm text-[11px] leading-tight mt-0.5">Dashboard</span></a><a class="flex flex-col items-center justify-center flex-1 h-14 min-w-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="bills-invoice" href="#"><span class="material-symbols-outlined text-[22px]">receipt_long</span><span class="font-label-sm text-[11px] leading-tight mt-0.5">Bills</span></a><a class="flex flex-col items-center justify-center flex-1 h-14 min-w-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="meter-readings" href="#"><span class="material-symbols-outlined text-[22px]">speed</span><span class="font-label-sm text-[11px] leading-tight mt-0.5">Readings</span></a><a class="flex flex-col items-center justify-center flex-1 h-14 min-w-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="customers" href="#"><span class="material-symbols-outlined text-[22px]">group</span><span class="font-label-sm text-[11px] leading-tight mt-0.5">Customers</span></a><button aria-label="Toggle Menu" class="flex flex-col items-center justify-center flex-1 h-14 min-w-[44px] text-on-surface-variant hover:text-on-surface transition-colors" onclick="document.getElementById('side-drawer').classList.remove('-translate-x-full');document.getElementById('drawer-overlay').classList.remove('opacity-0','pointer-events-none');" type="button"><span class="material-symbols-outlined text-[22px]">menu_open</span><span class="font-label-sm text-[11px] leading-tight mt-0.5">Menu</span></button></div></nav>
+
+<script>
+  (function initDashboardNavigation() {
+    const routes = {
+      'admin-dashboard': '../admin_dashboard/code.html',
+      'bills-invoice': '../bill_generation_invoice/code.html',
+      'meter-readings': '../meter_readings/code.html',
+      'customers': '../customer_management/code.html',
+      'meters': '../meter_management/code.html',
+      'payments': '../payments_management/code.html',
+      'dashboard': '../admin_dashboard/code.html',
+      'bills': '../bill_generation_invoice/code.html',
+      'readings': '../meter_readings/code.html',
+      'users': '../customer_management/code.html',
+      'consumers': '../customer_management/code.html',
+      'profile': '../customer_portal_consumption/code.html'
+    };
+
+    document.querySelectorAll('[data-path]').forEach((element) => {
+      const path = element.dataset.path;
+      const target = routes[path];
+      if (!target) return;
+
+      element.addEventListener('click', (event) => {
+        event.preventDefault();
+        window.location.href = target;
+      });
+    });
+
+    document.querySelectorAll('a[href="#"]').forEach((element) => {
+      const target = routes[element.dataset.path || ''];
+      if (!target) return;
+      element.addEventListener('click', (event) => {
+        event.preventDefault();
+        window.location.href = target;
+      });
+    });
+  })();
+</script>
+</body></html>
